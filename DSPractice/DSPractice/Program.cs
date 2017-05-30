@@ -19,7 +19,7 @@ namespace DSPractice
             foreach (var item in i)
                 Console.Write(item + ",");
             Console.WriteLine("");
-            var o = new InsertionSort();
+            var o = new SelectionSort();
             i = o.sort(i);
             foreach (var item in i)
                 Console.Write(item + ",");
