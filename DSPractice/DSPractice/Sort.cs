@@ -172,6 +172,7 @@ namespace DSPractice
     {
         int[] a = { 10, 14, 19, 26, 27, 31, 33, 35, 42, 44 };
         int[] b = new int[10];
+
         void merging(int low, int mid, int high)
         {
             int l1, l2, i;
@@ -209,7 +210,6 @@ namespace DSPractice
 
     public class HeapSort
     {
-        // main function to do heap sort
         public int[] sort(int[] arr)
         {
             int n = arr.Length;
@@ -252,7 +252,6 @@ namespace DSPractice
                 heapify(arr, n, largest);
             }
         }
-
     }
 
     public class QuickSort
@@ -266,12 +265,8 @@ namespace DSPractice
         {
             if (low < high)
             {
-                /* pi is partitioning index, arr[p] is now
-                   at right place */
                 int pi = partition(arr, low, high);
 
-                // Separately sort elements before
-                // partition and after partition
                 qsort(arr, low, pi - 1);
                 qsort(arr, pi + 1, high);
             }
@@ -280,16 +275,14 @@ namespace DSPractice
 
         int partition(int[] arr, int low, int high)
         {
-            int pivot = arr[high];    // pivot
-            int i = (low - 1);  // Index of smaller element
+            int pivot = arr[high];    
+            int i = (low - 1);  
 
             for (int j = low; j <= high - 1; j++)
             {
-                // If current element is smaller than or
-                // equal to pivot
                 if (arr[j] <= pivot)
                 {
-                    i++;    // increment index of smaller element
+                    i++;   
                     swap.fnSwap(ref arr[i], ref arr[j]);
                 }
             }
