@@ -30,12 +30,20 @@ namespace DSPractice
             q.Enqueue(treeNode);
             var _current = new BinaryTreeNode();
             _current = treeNode;
-            while (q.Count != 0)
+
+            try
             {
-                _current = (BinaryTreeNode)q.Dequeue();
-                Console.Write(_current.Data + " ");
-                q.Enqueue(_current.Left);
-                q.Enqueue(_current.Right);
+                while (q.Count != 0)
+                {
+                    _current = (BinaryTreeNode)q.Dequeue();
+                    Console.Write(_current.Data + " ");
+                    q.Enqueue(_current.Left);
+                    q.Enqueue(_current.Right);
+                }
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine("");
             }
 
 
