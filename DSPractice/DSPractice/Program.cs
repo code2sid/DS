@@ -11,12 +11,20 @@ namespace DSPractice
     {
         static void Main(string[] args)
         {
-            Graph();
+            Prac();
+            //Graph();
             //search();
             //sort();
             //GetHastTable();
 
 
+        }
+
+        static void Prac()
+        {
+            int[] i = { 0, 3, 0, 1, 1, -1, -5, -5, 3, -3, -3, 0 };
+            var o = new Practice();
+            o.Threesum(i);
         }
 
         static void Graph()

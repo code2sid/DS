@@ -18,7 +18,7 @@ namespace DSPractice
 
     public class BubbleSort
     {
-        //o(n2)
+        //o(n^2)
         public int[] sort(int[] array)
         {
             for (int i = 0; i < array.Length - 1; i++)
@@ -36,7 +36,7 @@ namespace DSPractice
 
     public class InsertionSort
     {
-        //o(n2)
+        //o(n^2)
         public int[] sort(int[] array)
         {
             int item, pos;
@@ -59,7 +59,7 @@ namespace DSPractice
 
     public class SelectionSort
     {
-        //o(n2)
+        //o(n^2)
         public int[] sort(int[] array)
         {
             int min = 0;
@@ -83,7 +83,7 @@ namespace DSPractice
 
     public class MergeSort
     {
-        //o(n2)
+        //nlog n
         private void merge(int[] arr, int l, int m, int r)
         {
             // Merges two subarrays of arr[].
@@ -210,6 +210,7 @@ namespace DSPractice
 
     public class HeapSort
     {
+        //nlogn
         public int[] sort(int[] arr)
         {
             int n = arr.Length;
@@ -256,6 +257,7 @@ namespace DSPractice
 
     public class QuickSort
     {
+        //nlogn; worst : n^2
         public int[] sort(int[] arr)
         {
             qsort(arr, 0, arr.Length - 1);
