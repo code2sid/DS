@@ -37,7 +37,8 @@ namespace DSPractice
             //b.next = b1;
             //b1.next = b2;
 
-            o.Add2Nos(a, b);
+            //o.Add2Nos(a, b);
+            o.isPalimdrome(-2147447412);
         }
 
         static void Graph()

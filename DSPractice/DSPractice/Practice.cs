@@ -171,8 +171,6 @@ namespace DSPractice
             return true;
         }
 
-
-
         public ListNode Add2Nos(ListNode a, ListNode b)
         {
             var res = new ListNode(0);
@@ -236,6 +234,44 @@ namespace DSPractice
             return sentinel.next;
         }
 
+        public int Reverse(int a)
+        {
+            long r = 0;
+            while (a != 0)
+            {
+                r = r * 10 + a % 10;
+                a = a / 10;
+            }
+            if (r > int.MaxValue || r < int.MinValue)
+                return 0;
+            else
+                return (int)r;
+        }
+
+        public bool isPalimdrome(int x)
+        {
+            if (x < 0)
+                return false;
+            int hr = 0;
+            while (x > hr)
+            {
+                hr = hr * 10 + x % 10;
+                x = x / 10;
+            }
+            return (x == hr) || (x == hr / 10);
+        }
+
+        public int romanToInt(string s)
+        {
+            var map = new Dictionary<char, int>();
+            map.Add('I', 1);
+            map.Add('V', 5);
+            map.Add('X', 10);
+
+
+
+            return 0;
+        }
     }
 
     public class ListNode

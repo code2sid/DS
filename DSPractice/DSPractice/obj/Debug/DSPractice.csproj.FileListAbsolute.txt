@@ -10,3 +10,9 @@ C:\SID DS\DS\DSPractice\DSPractice\obj\Debug\DSPractice.pdb
 C:\SID DS\DS\DSPractice\DSPractice\bin\Debug\DSPractice.exe
 C:\SID DS\DS\DSPractice\DSPractice\bin\Debug\DSPractice.pdb
 C:\SID DS\DS\DSPractice\DSPractice\obj\Debug\DSPractice.csprojResolveAssemblyReference.cache
+D:\My Content\CodeMyProjects\DS\DSPractice\DSPractice\bin\Debug\DSPractice.exe.config
+D:\My Content\CodeMyProjects\DS\DSPractice\DSPractice\bin\Debug\DSPractice.exe
+D:\My Content\CodeMyProjects\DS\DSPractice\DSPractice\bin\Debug\DSPractice.pdb
+D:\My Content\CodeMyProjects\DS\DSPractice\DSPractice\obj\Debug\DSPractice.csprojResolveAssemblyReference.cache
+D:\My Content\CodeMyProjects\DS\DSPractice\DSPractice\obj\Debug\DSPractice.exe
+D:\My Content\CodeMyProjects\DS\DSPractice\DSPractice\obj\Debug\DSPractice.pdb
