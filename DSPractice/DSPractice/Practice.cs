@@ -34,6 +34,7 @@ namespace DSPractice
         public int[] ptrsum(int[] arr, int tar)
         {
             // if not sorted error, n if we sort then we changed the expected result.
+            // good in case where we need numbers only and not the index.
             int ptr1 = 0, ptr2 = arr.Length - 1;
             int[] indexes = { 0 };
             while (ptr1 <= ptr2)
@@ -50,22 +51,21 @@ namespace DSPractice
             return indexes;
         }
 
-        public int[] hash(int[] arr, int target)
+        public int[] sumof2(int[] arr, int target)
         {
-            //error in 3,3,4,4 target = 6 same key already added
+            //error in 3,3,4,4 target = 6 same key already added>>> resolve them by checking is already exists.
             var d = new Dictionary<int, int>();
             var res = new int[2];
             for (int i = 0; i < arr.Length; i++)
-                d.Add(arr[i], i);
-
-            foreach (var i in d.Keys)
             {
-                if ((target - i) != i && d[target - i] != null)
+                if (d.ContainsKey(target - arr[i]))
                 {
-                    res[0] = d[i];
-                    res[1] = d[target - i];
-                    break;
+                    res[0] = i;
+                    res[1] = d[target - arr[i]];
                 }
+
+                if (!d.ContainsKey(arr[i]))
+                    d.Add(arr[i], i);
             }
 
             return res;
@@ -172,32 +172,78 @@ namespace DSPractice
         }
 
 
-        public IList<IList<int>> ThreeSum_optimzed(int[] num)
+
+        public ListNode Add2Nos(ListNode a, ListNode b)
         {
-            num = new HeapSort().sort(num);
-            var res = new List<IList<int>>();
-            for (int i = 0; i < num.Length - 2; i++)
+            var res = new ListNode(0);
+            ListNode r = res;
+            int sum = 0;
+            while (a != null || b != null)
             {
-                if (i == 0 || (i > 0 && num[i] != num[i - 1]))
+                if (a != null)
                 {
-                    int lo = i + 1, hi = num.Length - 1, sum = 0 - num[i];
-                    while (lo < hi)
-                    {
-                        if (num[lo] + num[hi] == sum)
-                        {
-                            var r = new List<int>();
-                            r.Add(num[i]); r.Add(num[lo]); r.Add(num[hi]);
-                            res.Add(r);
-                            while (lo < hi && num[lo] == num[lo + 1]) lo++;
-                            while (lo < hi && num[hi] == num[hi - 1]) hi--;
-                            lo++; hi--;
-                        }
-                        else if (num[lo] + num[hi] < sum) lo++;
-                        else hi--;
-                    }
+                    sum += a.val;
+                    a = a.next;
                 }
+
+                if (b != null)
+                {
+                    sum += b.val;
+                    b = b.next;
+                }
+
+                sum += r.next != null ? r.next.val : 0;
+                r.next = new ListNode(sum);
+                r = r.next;
+                if (sum / 10 == 1)
+                {
+                    r.next = new ListNode(1);
+                    r.val %= 10;
+                }
+                sum = 0;
             }
-            return res;
+
+
+            return res.next;
+
         }
+
+        public ListNode addTwoNumbers(ListNode l1, ListNode l2)
+        {
+            ListNode c1 = l1;
+            ListNode c2 = l2;
+            ListNode sentinel = new ListNode(0);
+            ListNode d = sentinel;
+            int sum = 0;
+            while (c1 != null || c2 != null)
+            {
+                sum /= 10;
+                if (c1 != null)
+                {
+                    sum += c1.val;
+                    c1 = c1.next;
+                }
+                if (c2 != null)
+                {
+                    sum += c2.val;
+                    c2 = c2.next;
+                }
+                d.next = new ListNode(sum % 10);
+                d = d.next;
+            }
+            if (sum / 10 == 1)
+                d.next = new ListNode(1);
+            return sentinel.next;
+        }
+
     }
+
+    public class ListNode
+    {
+        public int val;
+        public ListNode next;
+        public ListNode(int x) { val = x; }
+    }
+
+
 }

@@ -24,7 +24,20 @@ namespace DSPractice
         {
             int[] i = { 0, 3, 0, 1, 1, -1, -5, -5, 3, -3, -3, 0 };
             var o = new Practice();
-            o.Threesum(i);
+            //o.Threesum(i);
+            var a = new ListNode(5);
+            var b = new ListNode(5);
+            //var a1 = new ListNode(4);
+            //var a2 = new ListNode(3);
+            //a.next = a1;
+            //a1.next = a2;
+
+            //var b1 = new ListNode(6);
+            //var b2 = new ListNode(4);
+            //b.next = b1;
+            //b1.next = b2;
+
+            o.Add2Nos(a, b);
         }
 
         static void Graph()
@@ -56,7 +69,7 @@ namespace DSPractice
 
 
             Console.Write("Enter no to search: ");
-            var o = new BreadthFirstSearch(treeNode);
+            var o = new BFS(treeNode);
             o.Search(int.Parse(Console.ReadLine()));
             Console.ReadLine();
 

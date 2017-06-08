@@ -14,11 +14,11 @@ namespace DSPractice
         public int Data { get; set; }
     }
 
-    public class BreadthFirstSearch
+    public class BFS
     {
         private Queue _searchQueue;
         private BinaryTreeNode _root;
-        public BreadthFirstSearch(BinaryTreeNode rootNode)
+        public BFS(BinaryTreeNode rootNode)
         {
             _searchQueue = new Queue();
             _root = rootNode;
