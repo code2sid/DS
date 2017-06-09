@@ -24,21 +24,28 @@ namespace DSPractice
         {
             int[] i = { 0, 3, 0, 1, 1, -1, -5, -5, 3, -3, -3, 0 };
             var o = new Practice();
+            //o.sum(i, 4); o.ptrsum(i, 4); o.sumof2_hash(i, 4);
             //o.Threesum(i);
-            var a = new ListNode(5);
+            #region listnode Declaration
+            /*var a = new ListNode(5);
             var b = new ListNode(5);
-            //var a1 = new ListNode(4);
-            //var a2 = new ListNode(3);
-            //a.next = a1;
-            //a1.next = a2;
+            var a1 = new ListNode(4);
+            var a2 = new ListNode(3);
+            a.next = a1;
+            a1.next = a2;
 
-            //var b1 = new ListNode(6);
-            //var b2 = new ListNode(4);
-            //b.next = b1;
-            //b1.next = b2;
+            var b1 = new ListNode(6);
+            var b2 = new ListNode(4);
+            b.next = b1;
+            b1.next = b2;*/
+            #endregion 
 
             //o.Add2Nos(a, b);
-            o.isPalimdrome(-2147447412);
+            //o.Reverse(123453);
+            //o.isPalimdrome(1221);
+            //o.romanToInt("IMMMM");
+            //o.intToRoman(2159);
+            o.intToEngWords(89789456);
         }
 
         static void Graph()
