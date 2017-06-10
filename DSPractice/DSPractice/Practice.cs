@@ -51,7 +51,7 @@ namespace DSPractice
             return indexes;
         }
 
-        public int[] sumof2(int[] arr, int target)
+        public int[] sumof2_hash(int[] arr, int target)
         {
             //error in 3,3,4,4 target = 6 same key already added>>> resolve them by checking is already exists.
             var d = new Dictionary<int, int>();
@@ -66,63 +66,6 @@ namespace DSPractice
 
                 if (!d.ContainsKey(arr[i]))
                     d.Add(arr[i], i);
-            }
-
-            return res;
-        }
-
-        public IList<IList<int>> sum(int[] arr)
-        {
-            arr = new QuickSort().sort(arr);
-            IList<IList<int>> res = new List<IList<int>>();
-            for (int i = 0; i < arr.Length; i++)
-            {
-                for (int j = i + 1; j < arr.Length; j++)
-                {
-                    for (int k = j + 1; k < arr.Length; k++)
-                    {
-                        if ((arr[i] + arr[j] + arr[k] == 0))
-                        {
-                            var s = new List<int>();
-                            s.Add(arr[i]);
-                            s.Add(arr[j]);
-                            s.Add(arr[k]);
-                            res.Add(s);
-                            break;
-                        }
-                    }
-                }
-            }
-
-            for (int i = 0; i < res.Count; i++)
-            {
-                for (int j = i + 1; j < res.Count; j++)
-                {
-                    if ((res[i][0] == res[j][0] || res[i][0] == res[j][1] || res[i][0] == res[j][2]) &&
-                    (res[i][1] == res[j][0] || res[i][1] == res[j][1] || res[i][1] == res[j][2]) &&
-                    (res[i][2] == res[j][0] || res[i][2] == res[j][1] || res[i][2] == res[j][2]))
-                    {
-                        res.RemoveAt(j); j--;
-                    }
-                }
-            }
-            int allzeros = 0;
-            if (res.Count == 0)
-            {
-                for (int i = 0; i < arr.Length; i++)
-                    if (arr[i] != 0)
-                    {
-                        allzeros = 1;
-                        break;
-                    }
-                if (arr.Length > 2 && allzeros == 0)
-                {
-                    var s = new List<int>();
-                    s.Add(0);
-                    s.Add(0);
-                    s.Add(0);
-                    res.Add(s);
-                }
             }
 
             return res;
@@ -206,34 +149,6 @@ namespace DSPractice
 
         }
 
-        public ListNode addTwoNumbers(ListNode l1, ListNode l2)
-        {
-            ListNode c1 = l1;
-            ListNode c2 = l2;
-            ListNode sentinel = new ListNode(0);
-            ListNode d = sentinel;
-            int sum = 0;
-            while (c1 != null || c2 != null)
-            {
-                sum /= 10;
-                if (c1 != null)
-                {
-                    sum += c1.val;
-                    c1 = c1.next;
-                }
-                if (c2 != null)
-                {
-                    sum += c2.val;
-                    c2 = c2.next;
-                }
-                d.next = new ListNode(sum % 10);
-                d = d.next;
-            }
-            if (sum / 10 == 1)
-                d.next = new ListNode(1);
-            return sentinel.next;
-        }
-
         public int Reverse(int a)
         {
             long r = 0;
@@ -267,10 +182,65 @@ namespace DSPractice
             map.Add('I', 1);
             map.Add('V', 5);
             map.Add('X', 10);
+            map.Add('L', 50);
+            map.Add('C', 100);
+            map.Add('D', 500);
+            map.Add('M', 1000);
+            int sum = map[s[s.Length - 1]];
+            for (int i = s.Length - 2; i >= 0; --i)
+            {
+                if (map[s[i]] < map[s[i + 1]])
+                    sum -= map[s[i]];
+                else
+                    sum += map[s[i]];
+            }
 
 
+            return sum;
+        }
 
-            return 0;
+        public string intToRoman(int num)
+        {
+            string[] M = { "", "M", "MM", "MMM" };
+            string[] C = { "", "C", "CC", "CCC", "CD", "D", "DC", "DCC", "DCCC", "CM" };
+            string[] X = { "", "X", "XX", "XXX", "XL", "L", "LX", "LXX", "LXXX", "XC" };
+            string[] I = { "", "I", "II", "III", "IV", "V", "VI", "VII", "VIII", "IX" };
+            return M[num / 1000] + C[(num % 1000) / 100] + X[(num % 100) / 10] + I[num % 10];
+        }
+
+        String[] LESS_THAN_20 = { "", "One", "Two", "Three", "Four", "Five", "Six", "Seven", "Eight", "Nine", "Ten", "Eleven", "Twelve", "Thirteen", "Fourteen", "Fifteen", 
+                                        "Sixteen", "Seventeen", "Eighteen", "Nineteen" };
+        String[] TENS = { "", "Ten", "Twenty", "Thirty", "Forty", "Fifty", "Sixty", "Seventy", "Eighty", "Ninety" };
+        String[] THOUSANDS = { "", "Thousand", "Million", "Billion" };
+
+        public string intToEngWords(int num)
+        {
+            if (num == 0) return "Zero";
+
+            int i = 0;
+            StringBuilder words = new StringBuilder();
+
+            while (num > 0)
+            {
+                if (num % 1000 != 0)
+                    words = new StringBuilder(helper(num % 1000) + THOUSANDS[i] + " " + words);
+                num /= 1000;
+                i++;
+            }
+
+            return words.ToString().Trim();
+        }
+
+        private String helper(int num)
+        {
+            if (num == 0)
+                return "";
+            else if (num < 20)
+                return LESS_THAN_20[num] + " ";
+            else if (num < 100)
+                return TENS[num / 10] + " " + helper(num % 10);
+            else
+                return LESS_THAN_20[num / 100] + " Hundred " + helper(num % 100);
         }
     }
 
