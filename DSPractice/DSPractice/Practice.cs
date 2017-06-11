@@ -242,6 +242,27 @@ namespace DSPractice
             else
                 return LESS_THAN_20[num / 100] + " Hundred " + helper(num % 100);
         }
+
+        public string LongestCommonPrefix(string[] strs)
+        {
+            if (strs.Count() == 0) return "";
+            string sb = strs[0];
+            //StringBuilder sb = new StringBuilder(strs[0]);
+            for (int i = 1; i < strs.Length; i++)
+                while (strs[i].IndexOf(sb) != 0)
+                    sb = sb.Substring(0, sb.Length - 1);
+
+            return sb;
+        }
+        
+        public bool IsValid(string s)
+        {
+            if (s.Contains("["))
+                return false;
+            return true;
+        }
+
+
     }
 
     public class ListNode

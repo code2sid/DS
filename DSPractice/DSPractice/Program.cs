@@ -38,14 +38,16 @@ namespace DSPractice
             var b2 = new ListNode(4);
             b.next = b1;
             b1.next = b2;*/
-            #endregion 
+            #endregion
 
             //o.Add2Nos(a, b);
             //o.Reverse(123453);
             //o.isPalimdrome(1221);
             //o.romanToInt("IMMMM");
             //o.intToRoman(2159);
-            o.intToEngWords(89789456);
+            //o.intToEngWords(89789456);
+            //o.LongestCommonPrefix(new string[] { "abd", "abe", "abc", "abz" });
+            o.IsValid("[");
         }
 
         static void Graph()
