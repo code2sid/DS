@@ -271,9 +271,7 @@ namespace DSPractice
                 if (sum < 0)
                     sum = 0;
                 if (maxSum < sum)
-                {
                     maxSum = sum;
-                }
             }
             return maxSum;
         }
@@ -306,6 +304,18 @@ namespace DSPractice
 
 
             return res;
+        }
+
+        public int LargestNonContiSum(int[] arr)
+        {
+            int inc = arr[0], exc = 0, new_exc = 0;
+            for (int i = 1; i < arr.Length; i++)
+            {
+                new_exc = inc > exc ? inc : exc;
+                inc = exc + arr[i];
+                new_exc = exc;
+            }
+            return inc > exc ? inc : exc;
         }
 
         public BinaryTreeNode Merge2Trees(BinaryTreeNode a, BinaryTreeNode b)

@@ -23,6 +23,8 @@ namespace DSPractice
         static void Prac()
         {
             int[] i = { -2, -3, 4, -1, -2, 1, 5, -3 };
+
+            int[] j = { 5, 5, 10, 40, 50, 35 };
             var o = new Practice();
             //o.sum(i, 4); o.ptrsum(i, 4); o.sumof2_hash(i, 4);
             //o.Threesum(i);
@@ -61,7 +63,8 @@ namespace DSPractice
             t2.Left = new BinaryTreeNode { Data = 1, Right = new BinaryTreeNode { Data = 4 } };
             t2.Right = new BinaryTreeNode { Data = 3, Right = new BinaryTreeNode { Data = 7 } };
 
-            var res = o.Merge2Trees(t1, t2);
+            //var res = o.Merge2Trees(t1, t2);
+            o.LargestNonContiSum(j);
         }
 
         static void Graph()
