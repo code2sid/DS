@@ -22,7 +22,7 @@ namespace DSPractice
 
         static void Prac()
         {
-            int[] i = { 0, 3, 0, 1, 1, -1, -5, -5, 3, -3, -3, 0 };
+            int[] i = { -2, -3, 4, -1, -2, 1, 5, -3 };
             var o = new Practice();
             //o.sum(i, 4); o.ptrsum(i, 4); o.sumof2_hash(i, 4);
             //o.Threesum(i);
@@ -47,7 +47,21 @@ namespace DSPractice
             //o.intToRoman(2159);
             //o.intToEngWords(89789456);
             //o.LongestCommonPrefix(new string[] { "abd", "abe", "abc", "abz" });
-            o.IsValid("[");
+            //o.IsValid("[");
+            //o.LargestContiSum(i);
+            //o.LargestContiArray(i);
+
+            var t1 = new BinaryTreeNode();
+            var t2 = new BinaryTreeNode();
+            t1.Data = 1;
+            t1.Left = new BinaryTreeNode { Data = 3, Left = new BinaryTreeNode { Data = 5 } };
+            t1.Right = new BinaryTreeNode { Data = 2 };
+
+            t2.Data = 2;
+            t2.Left = new BinaryTreeNode { Data = 1, Right = new BinaryTreeNode { Data = 4 } };
+            t2.Right = new BinaryTreeNode { Data = 3, Right = new BinaryTreeNode { Data = 7 } };
+
+            var res = o.Merge2Trees(t1, t2);
         }
 
         static void Graph()

@@ -254,7 +254,7 @@ namespace DSPractice
 
             return sb;
         }
-        
+
         public bool IsValid(string s)
         {
             if (s.Contains("["))
@@ -262,7 +262,65 @@ namespace DSPractice
             return true;
         }
 
+        public int LargestContiSum(int[] arr)
+        {
+            int sum = 0, maxSum = 0;
+            for (int i = 0; i < arr.Length; i++)
+            {
+                sum += arr[i];
+                if (sum < 0)
+                    sum = 0;
+                if (maxSum < sum)
+                {
+                    maxSum = sum;
+                }
+            }
+            return maxSum;
+        }
 
+        public int[] LargestContiArray(int[] arr)
+        {
+            int sum = 0, maxSum = 0, strt = 0, end = 0, j = 0;
+            int[] res = new int[arr.Length];
+            for (int i = 0; i < arr.Length; i++)
+            {
+                sum += arr[i];
+                if (sum < 0)
+                {
+                    sum = 0;
+                    strt = i + 1;
+                }
+                if (maxSum < sum)
+                {
+                    maxSum = sum;
+                    end = i;
+                }
+            }
+
+            while (strt != end + 1)
+            {
+                res[j] = arr[strt];
+                strt++;
+                j++;
+            }
+
+
+            return res;
+        }
+
+        public BinaryTreeNode Merge2Trees(BinaryTreeNode a, BinaryTreeNode b)
+        {
+            if (a == null && b == null) return null;
+
+            int val = (a == null ? 0 : a.Data) + (b == null ? 0 : b.Data);
+            var res = new BinaryTreeNode();
+            res.Data = val;
+
+            res.Left = Merge2Trees(a == null ? null : a.Left, b == null ? null : b.Left);
+            res.Right = Merge2Trees(a == null ? null : a.Right, b == null ? null : b.Right);
+
+            return res;
+        }
     }
 
     public class ListNode
