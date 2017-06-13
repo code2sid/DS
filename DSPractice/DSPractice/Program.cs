@@ -52,19 +52,71 @@ namespace DSPractice
             //o.IsValid("[");
             //o.LargestContiSum(i);
             //o.LargestContiArray(i);
-
+            /*
             var t1 = new BinaryTreeNode();
             var t2 = new BinaryTreeNode();
-            t1.Data = 1;
-            t1.Left = new BinaryTreeNode { Data = 3, Left = new BinaryTreeNode { Data = 5 } };
-            t1.Right = new BinaryTreeNode { Data = 2 };
+            CreateNodes(ref t1, ref t2);
+            var res = o.Merge2Trees(t1, t2);
+            */
+            //o.LargestNonAdjacentSum(j);
+            //o.LargestNonContiSum(i);
+            //o.LargestNonContiArray(i);
+            //var res = o.Reverse("Siddharth gupta");
+        }
 
-            t2.Data = 2;
-            t2.Left = new BinaryTreeNode { Data = 1, Right = new BinaryTreeNode { Data = 4 } };
-            t2.Right = new BinaryTreeNode { Data = 3, Right = new BinaryTreeNode { Data = 7 } };
+        static void CreateNodes(ref BinaryTreeNode t1, ref BinaryTreeNode t2)
+        {
+            /*
+            [9,-1,null,-2,0,-4,null,null,8,-5,-3,6,null,null,null,null,null,null,7]
+[-1,-2,0,null,null,null,8,6,null,null,7]
+                        */
+            t1.Data = 9;
+            t1.Left = new BinaryTreeNode
+            {
+                Data = -1,
+                Left = new BinaryTreeNode
+                {
+                    Data = -2,
+                    Left = new BinaryTreeNode
+                    {
+                        Data = -4,
+                        Left = new BinaryTreeNode { Data = -5 },
+                        Right = new BinaryTreeNode { Data = -3 }
 
-            //var res = o.Merge2Trees(t1, t2);
-            o.LargestNonContiSum(j);
+                    }
+                },
+                Right = new BinaryTreeNode
+                {
+                    Data = 0,
+                    Right = new BinaryTreeNode
+                    {
+                        Data = 8,
+                        Left = new BinaryTreeNode
+                        {
+                            Data = 6,
+                            Right = new BinaryTreeNode { Data = 7 }
+                        }
+                    }
+                }
+            };
+
+
+            t2.Data = -1;
+            t2.Left = new BinaryTreeNode { Data = -2 };
+            t2.Right = new BinaryTreeNode
+            {
+                Data = 0,
+                Right = new BinaryTreeNode
+                {
+                    Data = 8,
+                    Left = new BinaryTreeNode
+                    {
+                        Data = 6,
+                        Right = new BinaryTreeNode { Data = 7 }
+                    }
+                }
+            };
+
         }
 
         static void Graph()

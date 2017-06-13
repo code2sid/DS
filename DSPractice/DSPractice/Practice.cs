@@ -306,7 +306,7 @@ namespace DSPractice
             return res;
         }
 
-        public int LargestNonContiSum(int[] arr)
+        public int LargestNonAdjacentSum(int[] arr)
         {
             int inc = arr[0], exc = 0, new_exc = 0;
             for (int i = 1; i < arr.Length; i++)
@@ -318,19 +318,72 @@ namespace DSPractice
             return inc > exc ? inc : exc;
         }
 
+        public int LargestNonContiSum(int[] arr)
+        {
+            int s1 = 0, s2 = 0, maxSum = 0;
+            //int[] res = new int[arr.Length];
+            for (int i = 0; i < arr.Length; i++)
+            {
+                s1 += arr[i];
+                if (s1 > s2)
+                    maxSum += arr[i];
+                s2 = s1;
+                if (s1 < 0)
+                {
+                    s1 = 0;
+                    s2 = 0;
+                }
+            }
+
+            return maxSum;
+        }
+        public int[] LargestNonContiArray(int[] arr)
+        {
+            int s1 = 0, s2 = 0, j = 0;
+            int[] res = new int[arr.Length];
+            for (int i = 0; i < arr.Length; i++)
+            {
+                s1 += arr[i];
+                if (s1 > s2)
+                {
+                    res[j] = arr[i];
+                    j++;
+
+                }
+                s2 = s1;
+                if (s1 < 0)
+                {
+                    s1 = 0;
+                    s2 = 0;
+                }
+            }
+
+            return res;
+        }
+
         public BinaryTreeNode Merge2Trees(BinaryTreeNode a, BinaryTreeNode b)
         {
             if (a == null && b == null) return null;
 
             int val = (a == null ? 0 : a.Data) + (b == null ? 0 : b.Data);
-            var res = new BinaryTreeNode();
-            res.Data = val;
+            if (a == null)
+                a = b;
+            a.Data = val;
 
-            res.Left = Merge2Trees(a == null ? null : a.Left, b == null ? null : b.Left);
-            res.Right = Merge2Trees(a == null ? null : a.Right, b == null ? null : b.Right);
+            a.Left = Merge2Trees(a == null ? null : a.Left, b == null ? null : b.Left);
+            a.Right = Merge2Trees(a == null ? null : a.Right, b == null ? null : b.Right);
 
-            return res;
+            return a;
         }
+
+        public string Reverse(string str)
+        {
+            char[] res = str.ToCharArray();
+            for (int i = 0; i < str.Length / 2; i++)
+                swap.fnSwap(ref res[i], ref res[res.Length - i - 1]);
+            return new string(res);
+        }
+
     }
 
     public class ListNode

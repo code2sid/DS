@@ -14,6 +14,12 @@ namespace DSPractice
             a = b;
             b = t;
         }
+        public static void fnSwap(ref char a, ref char b)
+        {
+            char t = a;
+            a = b;
+            b = t;
+        }
     }
 
     public class BubbleSort
