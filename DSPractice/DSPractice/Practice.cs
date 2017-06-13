@@ -378,10 +378,17 @@ namespace DSPractice
 
         public string Reverse(string str)
         {
-            char[] res = str.ToCharArray();
-            for (int i = 0; i < str.Length / 2; i++)
-                swap.fnSwap(ref res[i], ref res[res.Length - i - 1]);
-            return new string(res);
+            string[] s = str.Split(' ');
+            StringBuilder res = new StringBuilder();
+            foreach (var item in s)
+            {
+                char[] r = item.ToCharArray();
+                for (int i = 0; i < item.Length / 2; i++)
+                    swap.fnSwap(ref r[i], ref r[r.Length - i - 1]);
+                res.Append(new string(r) + " ");
+            }
+
+            return res.ToString().Trim();
         }
 
     }

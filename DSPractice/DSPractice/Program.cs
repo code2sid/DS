@@ -61,7 +61,7 @@ namespace DSPractice
             //o.LargestNonAdjacentSum(j);
             //o.LargestNonContiSum(i);
             //o.LargestNonContiArray(i);
-            //var res = o.Reverse("Siddharth gupta");
+            //var res = o.Reverse("Let's take the contest");
         }
 
         static void CreateNodes(ref BinaryTreeNode t1, ref BinaryTreeNode t2)
