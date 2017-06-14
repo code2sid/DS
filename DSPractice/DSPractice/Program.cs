@@ -24,7 +24,7 @@ namespace DSPractice
         {
             int[] i = { -2, -3, 4, -1, -2, 1, 5, -3 };
             int[] j = { 5, 5, 10, 40, 50, 35 };
-            int[] r = { 3, 5, 8, 9, 10, 17, 17, 20 };
+            int[] r = { 1, 5, 8, 9, 10, 17, 17, 20 };
             var o = new Practice();
             var t1 = new TreeNode();
             var t2 = new TreeNode();
@@ -56,33 +56,46 @@ namespace DSPractice
             //o.IsValid("[");
             //o.LargestContiSum(i);
             //o.LargestContiArray(i);
-            /*
-            var res = o.Merge2Trees(t1, t2);
-            */
             //o.LargestNonAdjacentSum(j);
             //o.LargestNonContiSum(i);
             //o.LargestNonContiArray(i);
             //var res = o.Reverse("Let's take the contest");
-            //var m = o.RodCutProblem(r, 8);
+            var m = o.RodCutProblem(r, 8);
             #endregion Practice Ques
+
+            //var res = o.Merge2Trees(t1, t2);
             //var d = o.BTMaxDepth(t2);
             //var nd = o.DFSTreeInvertRecur(t2);
             //var nd = o.DFSTreeInvertIterate(t1);
             //var nd = o.BFSTreeInvertIterate(t1);
-            }
+            //var b = o.isSubtree(t1, t2);
+            var b = o.isSubtree1(t1, t2);
+        }
 
         static void CreateNodes(ref TreeNode t1, ref TreeNode t2)
         {
-            /*
-            [9,-1,null,-2,0,-4,null,null,8,-5,-3,6,null,null,null,null,null,null,7]
-[-1,-2,0,null,4,null,8,null,null6,null,null,7]
-                        */
+            //is Sub-tree
+            t1.val = 3;
+            t1.left = new TreeNode { val = 4, left = new TreeNode { val = 1, left = new TreeNode { val = 0 }/**/  }, right = new TreeNode { val = 2 } };
+            t1.right = new TreeNode { val = 5 };
+
+            t2.val = 4;
+            t2.left = new TreeNode { val = 1 };
+            t2.right = new TreeNode { val = 2 };
+
+            return;
+            //Tree Invert 
             t1.val = 4;
             t1.left = new TreeNode { val = 2, left = new TreeNode { val = 1 }, right = new TreeNode { val = 3 } };
             t1.right = new TreeNode { val = 7, left = new TreeNode { val = 6 }, right = new TreeNode { val = 9 } };
 
             return;
 
+            /*
+             * Max Depth
+             * [9,-1,null,-2,0,-4,null,null,8,-5,-3,6,null,null,null,null,null,null,7]
+            [-1,-2,0,null,4,null,8,null,null6,null,null,7]
+            */
             t1.val = 9;
             t1.left = new TreeNode
             {

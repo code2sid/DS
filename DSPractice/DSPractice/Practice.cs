@@ -9,6 +9,7 @@ namespace DSPractice
 {
     public class Practice
     {
+        #region Level 1
         public int[] sum(int[] arr, int tar)
         {
             int[] sol = new int[2];
@@ -376,6 +377,7 @@ namespace DSPractice
 
             return res.ToString().Trim();
         }
+        #endregion Level 1
 
         internal int RodCutProblem(int[] price, int n)
         {
@@ -414,15 +416,16 @@ namespace DSPractice
             int cnt = 0;
             var q = new Queue();
             q.Enqueue(t);
+            int size = -100;
             while (q.Count != 0)
             {
                 cnt++;
-                for (int i = 0; i < q.Count; i++)
+                size = q.Count;
+                for (int i = 0; i < size; i++)
                 {
                     var c = (TreeNode)q.Dequeue();
                     if (c.left != null) q.Enqueue(c.left);
                     if (c.right != null) q.Enqueue(c.right);
-
                 }
             }
 
@@ -480,32 +483,80 @@ namespace DSPractice
             return root;
         }
 
+        //tree traversal
         internal bool isSubtree(TreeNode t1, TreeNode t2)
         {
-            var q1 = new Queue();
-            var q2 = new Queue();
-            q1.Enqueue(t1);
-            q2.Enqueue(t2);
-            while (q1.Count != 0)
-            {
-                var a = (TreeNode)q1.Dequeue();
-                while (q2.Count != 0)
-                {
-                    var b = (TreeNode)q2.Dequeue();
-                    if (a == b)
-                    {
-                        if (b.left != null) q2.Enqueue(b.left);
-                        if (b.right != null) q2.Enqueue(b.right);
-                        break;
-                    }
-                }
-                if (a.left != null) q1.Enqueue(a.left);
-                if (a.right != null) q1.Enqueue(a.right);
-
-
-            }
-            return false;
+            if (t1 == null) return false;
+            if (AreEqual(t1, t2)) return true;
+            return isSubtree(t1.left, t2) || isSubtree(t1.right, t2);
         }
+        bool AreEqual(TreeNode a, TreeNode b)
+        {
+            if (a == null && b == null) return true;
+            if (a == null || b == null) return false;
+            if (a.val != b.val) return false;
+
+            return AreEqual(a.left, b.left) && AreEqual(a.right, b.right);
+        }
+        TreeNode result;
+        void isT2(TreeNode t1, int val)
+        {
+            if (t1 == null)
+                return;
+            if (t1.val == val)
+            {
+                result = t1;
+                return;
+            }
+            isT2(t1.left, val);
+            isT2(t1.right, val);
+        }
+
+        bool isSubtree2(TreeNode result, TreeNode b)
+        {
+            if (result == null && b == null)
+                return true;
+            if (b == null && result != null)
+                return false;
+            if (result == null && b != null)
+                return false;
+            if (result.val != b.val)
+                return false;
+            
+            return isSubtree2(result.left, b.left) && isSubtree(result.right, b.right);
+        }
+
+        int height(TreeNode node)
+        {
+            if (node == null)
+                return 0;
+            return 1 +  Math.Min(height(node.left), height(node.right));
+        }
+
+        //preorder traversal
+        internal bool isSubtree1(TreeNode s, TreeNode t)
+        {int[] i = {1221}
+            "abcbabab"
+            string str1 = generatepreorderString(s), str2 = generatepreorderString(t);
+            str1 = str1.Replace(str2, "#,");
+            str1 = str1.Substring(str1.IndexOf("#,") + 2);
+            return str1.Length == 0;
+        }
+        internal string generatepreorderString(TreeNode s)
+        {
+            var str = new StringBuilder();
+            Queue q = new Queue();
+            q.Enqueue(s);
+            while (q.Count != 0)
+            {
+                var c = (TreeNode)q.Dequeue();
+                str.Append("," + c.val);
+                if (c.right != null) q.Enqueue(c.right);
+                if (c.left != null) q.Enqueue(c.left);
+            }
+            return str.ToString();
+        }
+
 
         #endregion treeNodes
 
