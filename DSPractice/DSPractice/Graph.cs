@@ -7,41 +7,41 @@ using System.Threading.Tasks;
 
 namespace DSPractice
 {
-    public class BinaryTreeNode
+    public class TreeNode
     {
-        public BinaryTreeNode Left { get; set; }
-        public BinaryTreeNode Right { get; set; }
-        public int Data { get; set; }
+        public TreeNode left { get; set; }
+        public TreeNode right { get; set; }
+        public int val { get; set; }
     }
 
     public class BFS
     {
         private Queue _searchQueue;
-        private BinaryTreeNode _root;
-        public BFS(BinaryTreeNode rootNode)
+        private TreeNode _root;
+        public BFS(TreeNode rootNode)
         {
             _searchQueue = new Queue();
             _root = rootNode;
         }
         public bool Search(int data)
         {
-            BinaryTreeNode _current = _root;
+            TreeNode _current = _root;
             _searchQueue.Enqueue(_root);
             try
             {
                 while (_searchQueue.Count != 0)
                 {
-                    _current = (BinaryTreeNode)_searchQueue.Dequeue();
-                    Console.Write(_current.Data + " ");
-                    if (_current.Data == data)
+                    _current = (TreeNode)_searchQueue.Dequeue();
+                    Console.Write(_current.val + " ");
+                    if (_current.val == data)
                     {
                         Console.Write(" Data Found");
                         return true;
                     }
                     else
                     {
-                        _searchQueue.Enqueue(_current.Left);
-                        _searchQueue.Enqueue(_current.Right);
+                        _searchQueue.Enqueue(_current.left);
+                        _searchQueue.Enqueue(_current.right);
                     }
                 }
             }

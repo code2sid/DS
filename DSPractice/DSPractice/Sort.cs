@@ -20,6 +20,15 @@ namespace DSPractice
             a = b;
             b = t;
         }
+
+        public static TreeNode fnSwap(TreeNode t1)
+        {
+            TreeNode t = t1.left;
+            t1.left = t1.right;
+            t1.right = t;
+
+            return t1;
+        }
     }
 
     public class BubbleSort

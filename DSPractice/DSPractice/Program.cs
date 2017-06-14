@@ -23,9 +23,12 @@ namespace DSPractice
         static void Prac()
         {
             int[] i = { -2, -3, 4, -1, -2, 1, 5, -3 };
-
             int[] j = { 5, 5, 10, 40, 50, 35 };
+            int[] r = { 3, 5, 8, 9, 10, 17, 17, 20 };
             var o = new Practice();
+            var t1 = new TreeNode();
+            var t2 = new TreeNode();
+            CreateNodes(ref t1, ref t2);
             //o.sum(i, 4); o.ptrsum(i, 4); o.sumof2_hash(i, 4);
             //o.Threesum(i);
             #region listnode Declaration
@@ -42,6 +45,7 @@ namespace DSPractice
             b1.next = b2;*/
             #endregion
 
+            #region Practice Ques
             //o.Add2Nos(a, b);
             //o.Reverse(123453);
             //o.isPalimdrome(1221);
@@ -53,66 +57,75 @@ namespace DSPractice
             //o.LargestContiSum(i);
             //o.LargestContiArray(i);
             /*
-            var t1 = new BinaryTreeNode();
-            var t2 = new BinaryTreeNode();
-            CreateNodes(ref t1, ref t2);
             var res = o.Merge2Trees(t1, t2);
             */
             //o.LargestNonAdjacentSum(j);
             //o.LargestNonContiSum(i);
             //o.LargestNonContiArray(i);
             //var res = o.Reverse("Let's take the contest");
-        }
+            //var m = o.RodCutProblem(r, 8);
+            #endregion Practice Ques
+            //var d = o.BTMaxDepth(t2);
+            //var nd = o.DFSTreeInvertRecur(t2);
+            //var nd = o.DFSTreeInvertIterate(t1);
+            //var nd = o.BFSTreeInvertIterate(t1);
+            }
 
-        static void CreateNodes(ref BinaryTreeNode t1, ref BinaryTreeNode t2)
+        static void CreateNodes(ref TreeNode t1, ref TreeNode t2)
         {
             /*
             [9,-1,null,-2,0,-4,null,null,8,-5,-3,6,null,null,null,null,null,null,7]
-[-1,-2,0,null,null,null,8,6,null,null,7]
+[-1,-2,0,null,4,null,8,null,null6,null,null,7]
                         */
-            t1.Data = 9;
-            t1.Left = new BinaryTreeNode
+            t1.val = 4;
+            t1.left = new TreeNode { val = 2, left = new TreeNode { val = 1 }, right = new TreeNode { val = 3 } };
+            t1.right = new TreeNode { val = 7, left = new TreeNode { val = 6 }, right = new TreeNode { val = 9 } };
+
+            return;
+
+            t1.val = 9;
+            t1.left = new TreeNode
             {
-                Data = -1,
-                Left = new BinaryTreeNode
+                val = -1,
+                left = new TreeNode
                 {
-                    Data = -2,
-                    Left = new BinaryTreeNode
+                    val = -2,
+                    left = new TreeNode
                     {
-                        Data = -4,
-                        Left = new BinaryTreeNode { Data = -5 },
-                        Right = new BinaryTreeNode { Data = -3 }
+                        val = -4,
+                        left = new TreeNode { val = -5 },
+                        right = new TreeNode { val = -3 }
 
                     }
                 },
-                Right = new BinaryTreeNode
+                right = new TreeNode
                 {
-                    Data = 0,
-                    Right = new BinaryTreeNode
+                    val = 0,
+                    right = new TreeNode
                     {
-                        Data = 8,
-                        Left = new BinaryTreeNode
+                        val = 8,
+                        left = new TreeNode
                         {
-                            Data = 6,
-                            Right = new BinaryTreeNode { Data = 7 }
+                            val = 6,
+                            right = new TreeNode { val = 7 }
                         }
                     }
                 }
             };
 
 
-            t2.Data = -1;
-            t2.Left = new BinaryTreeNode { Data = -2 };
-            t2.Right = new BinaryTreeNode
+            t2.val = -1;
+            t2.left = new TreeNode { val = -2, right = new TreeNode { val = 4 } };
+            t2.right = new TreeNode
             {
-                Data = 0,
-                Right = new BinaryTreeNode
+                val = 0,
+                right = new TreeNode
                 {
-                    Data = 8,
-                    Left = new BinaryTreeNode
+                    val = 8,
+                    left = new TreeNode
                     {
-                        Data = 6,
-                        Right = new BinaryTreeNode { Data = 7 }
+                        val = 6,
+                        right = new TreeNode { val = 7 }
                     }
                 }
             };
@@ -121,24 +134,24 @@ namespace DSPractice
 
         static void Graph()
         {
-            var treeNode = new BinaryTreeNode();
-            treeNode.Data = 14;
-            treeNode.Left = new BinaryTreeNode { Data = 19, Left = new BinaryTreeNode { Data = 33 }, Right = new BinaryTreeNode { Data = 35 } };
-            treeNode.Right = new BinaryTreeNode { Data = 27, Left = new BinaryTreeNode { Data = 42 }, Right = new BinaryTreeNode { Data = 50 } };
+            var treeNode = new TreeNode();
+            treeNode.val = 14;
+            treeNode.left = new TreeNode { val = 19, left = new TreeNode { val = 33 }, right = new TreeNode { val = 35 } };
+            treeNode.right = new TreeNode { val = 27, left = new TreeNode { val = 42 }, right = new TreeNode { val = 50 } };
 
             var q = new Queue();
             q.Enqueue(treeNode);
-            var _current = new BinaryTreeNode();
+            var _current = new TreeNode();
             _current = treeNode;
 
             try
             {
                 while (q.Count != 0)
                 {
-                    _current = (BinaryTreeNode)q.Dequeue();
-                    Console.Write(_current.Data + " ");
-                    q.Enqueue(_current.Left);
-                    q.Enqueue(_current.Right);
+                    _current = (TreeNode)q.Dequeue();
+                    Console.Write(_current.val + " ");
+                    q.Enqueue(_current.left);
+                    q.Enqueue(_current.right);
                 }
             }
             catch (Exception ex)

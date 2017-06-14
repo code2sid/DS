@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -361,21 +362,6 @@ namespace DSPractice
             return res;
         }
 
-        public BinaryTreeNode Merge2Trees(BinaryTreeNode a, BinaryTreeNode b)
-        {
-            if (a == null && b == null) return null;
-
-            int val = (a == null ? 0 : a.Data) + (b == null ? 0 : b.Data);
-            if (a == null)
-                a = b;
-            a.Data = val;
-
-            a.Left = Merge2Trees(a == null ? null : a.Left, b == null ? null : b.Left);
-            a.Right = Merge2Trees(a == null ? null : a.Right, b == null ? null : b.Right);
-
-            return a;
-        }
-
         public string Reverse(string str)
         {
             string[] s = str.Split(' ');
@@ -390,6 +376,138 @@ namespace DSPractice
 
             return res.ToString().Trim();
         }
+
+        internal int RodCutProblem(int[] price, int n)
+        {
+            if (n <= 0)
+                return 0;
+
+            int maxSum = 0;
+            for (int i = 0; i < n; i++)
+                maxSum = Math.Max(maxSum, price[i] + RodCutProblem(price, n - i - 1));
+            return maxSum;
+
+        }
+
+        #region treeNodes
+        public TreeNode Merge2Trees(TreeNode a, TreeNode b)
+        {
+            if (a == null && b == null) return null;
+
+            int val = (a == null ? 0 : a.val) + (b == null ? 0 : b.val);
+            if (a == null)
+                a = b;
+            a.val = val;
+
+            a.left = Merge2Trees(a == null ? null : a.left, b == null ? null : b.left);
+            a.right = Merge2Trees(a == null ? null : a.right, b == null ? null : b.right);
+
+            return a;
+        }
+        internal int BTMaxDepth(TreeNode t)
+        {
+            if (t == null) return 0;
+            //DFS
+            //return 1 + Math.Max(BTMaxDepth(t.left), BTMaxDepth(t.right));
+
+            //BFS
+            int cnt = 0;
+            var q = new Queue();
+            q.Enqueue(t);
+            while (q.Count != 0)
+            {
+                cnt++;
+                for (int i = 0; i < q.Count; i++)
+                {
+                    var c = (TreeNode)q.Dequeue();
+                    if (c.left != null) q.Enqueue(c.left);
+                    if (c.right != null) q.Enqueue(c.right);
+
+                }
+            }
+
+            return cnt;
+
+
+        }
+        internal TreeNode DFSTreeInvertRecur(TreeNode root)
+        {
+            if (root == null)
+                return null;
+
+            TreeNode l = root.left, r = root.right;
+            root.left = DFSTreeInvertRecur(r);
+            root.right = DFSTreeInvertRecur(l);
+
+            return root;
+
+
+        }
+        internal TreeNode DFSTreeInvertIterate(TreeNode root)
+        {
+            Stack s = new Stack();
+            s.Push(root);
+            while (s.Count != 0)
+            {
+                var t = (TreeNode)s.Pop();
+                var temp = t.left;
+                t.left = t.right;
+                t.right = temp;
+
+                if (t.left != null)
+                    s.Push(t.left);
+                if (t.right != null)
+                    s.Push(t.right);
+            }
+            return root;
+        }
+        internal TreeNode BFSTreeInvertIterate(TreeNode root)
+        {
+            var q = new Queue();
+            q.Enqueue(root);
+            while (q.Count != 0)
+            {
+                var t = (TreeNode)q.Dequeue();
+                var temp = t.left;
+                t.left = t.right;
+                t.right = temp;
+
+                if (t.left != null)
+                    q.Enqueue(t.left);
+                if (t.right != null)
+                    q.Enqueue(t.right);
+            }
+            return root;
+        }
+
+        internal bool isSubtree(TreeNode t1, TreeNode t2)
+        {
+            var q1 = new Queue();
+            var q2 = new Queue();
+            q1.Enqueue(t1);
+            q2.Enqueue(t2);
+            while (q1.Count != 0)
+            {
+                var a = (TreeNode)q1.Dequeue();
+                while (q2.Count != 0)
+                {
+                    var b = (TreeNode)q2.Dequeue();
+                    if (a == b)
+                    {
+                        if (b.left != null) q2.Enqueue(b.left);
+                        if (b.right != null) q2.Enqueue(b.right);
+                        break;
+                    }
+                }
+                if (a.left != null) q1.Enqueue(a.left);
+                if (a.right != null) q1.Enqueue(a.right);
+
+
+            }
+            return false;
+        }
+
+        #endregion treeNodes
 
     }
 
