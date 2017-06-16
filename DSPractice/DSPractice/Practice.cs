@@ -522,21 +522,26 @@ namespace DSPractice
                 return false;
             if (result.val != b.val)
                 return false;
-            
+
             return isSubtree2(result.left, b.left) && isSubtree(result.right, b.right);
         }
 
-        int height(TreeNode node)
+        public int BTMinDepth(TreeNode node)
         {
             if (node == null)
                 return 0;
-            return 1 +  Math.Min(height(node.left), height(node.right));
+            int l = BTMinDepth(node.left);
+            int r = BTMinDepth(node.right);
+
+            if (l == 0 || r == 0)
+                return l + r + 1;
+
+            return 1 + Math.Min(l, r);
         }
 
         //preorder traversal
         internal bool isSubtree1(TreeNode s, TreeNode t)
-        {int[] i = {1221}
-            "abcbabab"
+        {
             string str1 = generatepreorderString(s), str2 = generatepreorderString(t);
             str1 = str1.Replace(str2, "#,");
             str1 = str1.Substring(str1.IndexOf("#,") + 2);
@@ -557,6 +562,108 @@ namespace DSPractice
             return str.ToString();
         }
 
+        public IList<IList<int>> BTLevelOrderTraversal(TreeNode t)
+        {
+            var res = new List<IList<int>>();
+            if (t == null)
+                return res;
+            Queue q = new Queue();
+            var s = new List<int>();
+            q.Enqueue(t);
+            while (q.Count != 0)
+            {
+                int level = q.Count;
+                s = new List<int>();
+                for (int i = 0; i < level; i++)
+                {
+                    var c = (TreeNode)q.Dequeue();
+                    s.Add(c.val);
+                    if (c.left != null) q.Enqueue(c.left);
+                    if (c.right != null) q.Enqueue(c.right);
+                }
+                res.Add(s);
+            }
+            return res;
+        }
+        public IList<IList<int>> BTReverseLevelOrderTraversal(TreeNode t)
+        {
+            var res = new List<IList<int>>();
+            if (t == null)
+                return res;
+            Queue q = new Queue();
+            var s = new List<int>();
+            q.Enqueue(t);
+            while (q.Count != 0)
+            {
+                int level = q.Count;
+                s = new List<int>();
+                for (int i = 0; i < level; i++)
+                {
+                    var c = (TreeNode)q.Dequeue();
+                    s.Add(c.val);
+                    if (c.left != null) q.Enqueue(c.left);
+                    if (c.right != null) q.Enqueue(c.right);
+                }
+                res.Insert(0, s);
+            }
+            return res;
+        }
+
+        public TreeNode Search(TreeNode t, int val)
+        {
+            var res = new TreeNode();
+            if (t == null)
+                return res;
+            var q = new Queue();
+            q.Enqueue(t);
+            while (q.Count != 0)
+            {
+                var c = (TreeNode)q.Dequeue();
+                if (c.val == val)
+                    return c;
+                else if (val > c.val && c.right != null)
+                    q.Enqueue(c.right);
+                else if (val < c.val && c.left != null)
+                    q.Enqueue(c.left);
+
+            }
+
+            return res;
+
+        }
+        public TreeNode RecSearch(TreeNode t, int val)
+        {
+            if (t == null || t.val == val)
+                return t;
+            if (val > t.val)
+                return RecSearch(t.right, val);
+
+            return RecSearch(t.left, val);
+
+        }
+
+        public List<int> PreOrerTraversal(TreeNode t)
+        {
+            var res = new List<int>();
+            if (t == null)
+                return res;
+
+            var s = new Stack();
+            TreeNode cur = t;
+            while (s.Count != 0 || cur!=null)
+            {
+                while (cur != null)
+                {
+                    s.Push(cur);
+                    cur = cur.left;
+                }
+                cur = (TreeNode)s.Pop();
+                res.Add(cur.val);
+                cur = cur.right;
+            }
+            return res;
+
+        }
 
         #endregion treeNodes
 
