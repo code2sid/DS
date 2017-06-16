@@ -642,7 +642,7 @@ namespace DSPractice
 
         }
 
-        public List<int> PreOrerTraversal(TreeNode t)
+        public List<int> InOrderTraversal(TreeNode t)
         {
             var res = new List<int>();
             if (t == null)
@@ -650,7 +650,7 @@ namespace DSPractice
 
             var s = new Stack();
             TreeNode cur = t;
-            while (s.Count != 0 || cur!=null)
+            while (s.Count != 0 || cur != null)
             {
                 while (cur != null)
                 {
@@ -664,9 +664,77 @@ namespace DSPractice
             return res;
 
         }
+        public List<int> PreOrderTraversal(TreeNode t)
+        {
+            var res = new List<int>();
+            if (t == null)
+                return res;
+            var s = new Stack();
+            s.Push(t);
+            while (s.Count != 0)
+            {
+                var c = (TreeNode)s.Pop();
+                res.Add(c.val);
+                if (c.right != null) s.Push(c.right);
+                if (c.left != null) s.Push(c.left);
+            }
+            return res;
+        }
+        public List<int> PostOrderTraversal(TreeNode t)
+        {
+            var res = new List<int>();
+            if (t == null)
+                return res;
+            var s = new Stack();
+            s.Push(t);
+            while (s.Count != 0)
+            {
+                var c = (TreeNode)s.Pop();
+                res.Insert(0, c.val);
+                if (c.left != null) s.Push(c.left);
+                if (c.right != null) s.Push(c.right);
+            }
+            return res;
+        }
+
+
 
         #endregion treeNodes
 
+    }
+
+
+    public class BSTIterator
+    {
+        public TreeNode BST { get; set; }
+        public int MinVal { get; set; }
+        public BSTIterator(TreeNode root)
+        {
+            BST = root;
+            if (root != null)
+                MinVal = root.val;
+        }
+
+        /** @return whether we have a next smallest number */
+        public bool HasNext()
+        {
+            if (BST == null)
+                return false;
+            if (BST.left != null && BST.left.val < MinVal)
+            {
+                BST = BST.left;
+                MinVal = BST.val;
+                return true;
+            }
+
+            return false;
+        }
+
+        /** @return the next smallest number */
+        public int Next()
+        {
+            return MinVal;
+        }
     }
 
     public class ListNode

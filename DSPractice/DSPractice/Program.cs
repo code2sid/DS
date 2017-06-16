@@ -73,7 +73,9 @@ namespace DSPractice
             //var l = o.BTLevelOrderTraversal(t1);
             //var l = o.BTReverseLevelOrderTraversal(t1);
             //var s = o.RecSearch(t1, 26);
-            //var l = o.PreOrerTraversal(t1);
+            //var l = o.InOrderTraversal(t1);
+            //var l = o.PreOrderTraversal(t1);
+            var l = o.PostOrderTraversal(t1);
         }
 
         static void CreateNodes(ref TreeNode t1, ref TreeNode t2)
@@ -82,12 +84,15 @@ namespace DSPractice
             [9,-1,null,-2,0,-4,null,null,8,-5,-3,6,null,null,null,null,null,null,7]
 [-1,-2,0,null,4,null,8,null,null6,null,null,7]
                         */
+            t1 = new TreeNode { val = 1, right = new TreeNode { val = 2, left = new TreeNode { val = 3 } } }; 
+            return;
+
             t1.val = 8;
             t1.left = new TreeNode { val = 3, left = new TreeNode { val = 1 }, right = new TreeNode { val = 6, left = new TreeNode { val = 4 }, right = new TreeNode { val = 7 } } };
             t1.right = new TreeNode { val = 10, right = new TreeNode { val = 14, left = new TreeNode { val = 13 } } };
 
-            t1.val = 1;
-            t1.left = new TreeNode { val = 2, left = new TreeNode { val = 4 }, right = new TreeNode { val = 5 } };
+            t1.val = 2;
+            t1.left = new TreeNode { val = 1, right = new TreeNode { val = 4 } };
             t1.right = new TreeNode { val = 3 };
 
             return;
