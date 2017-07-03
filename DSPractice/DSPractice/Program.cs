@@ -31,19 +31,6 @@ namespace DSPractice
             CreateNodes(ref t1, ref t2);
             //o.sum(i, 4); o.ptrsum(i, 4); o.sumof2_hash(i, 4);
             //o.Threesum(i);
-            #region listnode Declaration
-            /*var a = new ListNode(5);
-            var b = new ListNode(5);
-            var a1 = new ListNode(4);
-            var a2 = new ListNode(3);
-            a.next = a1;
-            a1.next = a2;
-
-            var b1 = new ListNode(6);
-            var b2 = new ListNode(4);
-            b.next = b1;
-            b1.next = b2;*/
-            #endregion
 
             #region Practice Ques
             //o.Add2Nos(a, b);
@@ -56,15 +43,14 @@ namespace DSPractice
             //o.IsValid("[");
             //o.LargestContiSum(i);
             //o.LargestContiArray(i);
-            /*
-            var res = o.Merge2Trees(t1, t2);
-            */
+            
             //o.LargestNonAdjacentSum(j);
             //o.LargestNonContiSum(i);
             //o.LargestNonContiArray(i);
             //var res = o.Reverse("Let's take the contest");
             //var m = o.RodCutProblem(r, 8);
             #endregion Practice Ques
+            var res = o.Merge2Trees(t1, t2);
             //var d = o.BTMaxDepth(t1);
             //var nd = o.DFSTreeInvertRecur(t2);
             //var nd = o.DFSTreeInvertIterate(t1);
@@ -84,7 +70,11 @@ namespace DSPractice
             [9,-1,null,-2,0,-4,null,null,8,-5,-3,6,null,null,null,null,null,null,7]
 [-1,-2,0,null,4,null,8,null,null6,null,null,7]
                         */
-            t1 = new TreeNode { val = 1, right = new TreeNode { val = 2, left = new TreeNode { val = 3 } } }; 
+            t1 = new TreeNode { val = 1, right = new TreeNode { val = 2, left = new TreeNode { val = 3 } } };
+            t2 = new TreeNode { val = 4, left = new TreeNode { val = 5, right = new TreeNode { val = 6 } } }; 
+
+            t1 = new TreeNode { val = 1, left = new TreeNode { val = 2 }, right = new TreeNode { val = 3 } };
+            t2 = new TreeNode { val = 4, left = new TreeNode { val = 5 }, right = new TreeNode { val = 6 } };
             return;
 
             t1.val = 8;

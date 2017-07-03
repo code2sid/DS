@@ -298,12 +298,7 @@ namespace DSPractice
             }
 
             while (strt != end + 1)
-            {
-                res[j] = arr[strt];
-                strt++;
-                j++;
-            }
-
+                res[j++] = arr[strt++];
 
             return res;
         }
@@ -322,19 +317,11 @@ namespace DSPractice
 
         public int LargestNonContiSum(int[] arr)
         {
-            int s1 = 0, s2 = 0, maxSum = 0;
-            //int[] res = new int[arr.Length];
+            int maxSum = 0;
             for (int i = 0; i < arr.Length; i++)
             {
-                s1 += arr[i];
-                if (s1 > s2)
+                if (arr[i] > 0)
                     maxSum += arr[i];
-                s2 = s1;
-                if (s1 < 0)
-                {
-                    s1 = 0;
-                    s2 = 0;
-                }
             }
 
             return maxSum;
@@ -345,19 +332,8 @@ namespace DSPractice
             int[] res = new int[arr.Length];
             for (int i = 0; i < arr.Length; i++)
             {
-                s1 += arr[i];
-                if (s1 > s2)
-                {
-                    res[j] = arr[i];
-                    j++;
-
-                }
-                s2 = s1;
-                if (s1 < 0)
-                {
-                    s1 = 0;
-                    s2 = 0;
-                }
+                if (arr[i] > 0)
+                    res[j++] = arr[i];
             }
 
             return res;
@@ -395,11 +371,11 @@ namespace DSPractice
         public TreeNode Merge2Trees(TreeNode a, TreeNode b)
         {
             if (a == null && b == null) return null;
+            if (a == null && b != null) return b;
+            if (a != null && b == null) return a;
 
-            int val = (a == null ? 0 : a.val) + (b == null ? 0 : b.val);
-            if (a == null)
-                a = b;
-            a.val = val;
+
+            a.val += b.val;
 
             a.left = Merge2Trees(a == null ? null : a.left, b == null ? null : b.left);
             a.right = Merge2Trees(a == null ? null : a.right, b == null ? null : b.right);
