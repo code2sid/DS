@@ -374,11 +374,10 @@ namespace DSPractice
             if (a == null && b != null) return b;
             if (a != null && b == null) return a;
 
-
             a.val += b.val;
 
-            a.left = Merge2Trees(a == null ? null : a.left, b == null ? null : b.left);
-            a.right = Merge2Trees(a == null ? null : a.right, b == null ? null : b.right);
+            a.left = Merge2Trees(a.left, b.left);
+            a.right = Merge2Trees(a.right, b.right);
 
             return a;
         }
@@ -460,20 +459,6 @@ namespace DSPractice
         }
 
         //tree traversal
-        internal bool isSubtree(TreeNode t1, TreeNode t2)
-        {
-            if (t1 == null) return false;
-            if (AreEqual(t1, t2)) return true;
-            return isSubtree(t1.left, t2) || isSubtree(t1.right, t2);
-        }
-        bool AreEqual(TreeNode a, TreeNode b)
-        {
-            if (a == null && b == null) return true;
-            if (a == null || b == null) return false;
-            if (a.val != b.val) return false;
-
-            return AreEqual(a.left, b.left) && AreEqual(a.right, b.right);
-        }
         TreeNode result;
         void isT2(TreeNode t1, int val)
         {
@@ -487,7 +472,6 @@ namespace DSPractice
             isT2(t1.left, val);
             isT2(t1.right, val);
         }
-
         bool isSubtree2(TreeNode result, TreeNode b)
         {
             if (result == null && b == null)
@@ -499,7 +483,7 @@ namespace DSPractice
             if (result.val != b.val)
                 return false;
 
-            return isSubtree2(result.left, b.left) && isSubtree(result.right, b.right);
+            return isSubtree2(result.left, b.left) && isSubtree2(result.right, b.right);
         }
 
         public int BTMinDepth(TreeNode node)
@@ -516,28 +500,6 @@ namespace DSPractice
         }
 
         //preorder traversal
-        internal bool isSubtree1(TreeNode s, TreeNode t)
-        {
-            string str1 = generatepreorderString(s), str2 = generatepreorderString(t);
-            str1 = str1.Replace(str2, "#,");
-            str1 = str1.Substring(str1.IndexOf("#,") + 2);
-            return str1.Length == 0;
-        }
-        internal string generatepreorderString(TreeNode s)
-        {
-            var str = new StringBuilder();
-            Queue q = new Queue();
-            q.Enqueue(s);
-            while (q.Count != 0)
-            {
-                var c = (TreeNode)q.Dequeue();
-                str.Append("," + c.val);
-                if (c.right != null) q.Enqueue(c.right);
-                if (c.left != null) q.Enqueue(c.left);
-            }
-            return str.ToString();
-        }
-
         public IList<IList<int>> BTLevelOrderTraversal(TreeNode t)
         {
             var res = new List<IList<int>>();

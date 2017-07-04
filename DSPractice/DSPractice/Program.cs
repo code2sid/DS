@@ -66,73 +66,9 @@ namespace DSPractice
 
         static void CreateNodes(ref TreeNode t1, ref TreeNode t2)
         {
-            /*
-            [9,-1,null,-2,0,-4,null,null,8,-5,-3,6,null,null,null,null,null,null,7]
-[-1,-2,0,null,4,null,8,null,null6,null,null,7]
-                        */
-            t1 = new TreeNode { val = 1, right = new TreeNode { val = 2, left = new TreeNode { val = 3 } } };
-            t2 = new TreeNode { val = 4, left = new TreeNode { val = 5, right = new TreeNode { val = 6 } } }; 
-
-            t1 = new TreeNode { val = 1, left = new TreeNode { val = 2 }, right = new TreeNode { val = 3 } };
-            t2 = new TreeNode { val = 4, left = new TreeNode { val = 5 }, right = new TreeNode { val = 6 } };
-            return;
-
-            t1.val = 8;
-            t1.left = new TreeNode { val = 3, left = new TreeNode { val = 1 }, right = new TreeNode { val = 6, left = new TreeNode { val = 4 }, right = new TreeNode { val = 7 } } };
-            t1.right = new TreeNode { val = 10, right = new TreeNode { val = 14, left = new TreeNode { val = 13 } } };
-
-            t1.val = 2;
-            t1.left = new TreeNode { val = 1, right = new TreeNode { val = 4 } };
-            t1.right = new TreeNode { val = 3 };
-
-            return;
-
-            t1.val = 9;
-            t1.left = new TreeNode
-            {
-                val = -1,
-                left = new TreeNode
-                {
-                    val = -2,
-                    left = new TreeNode
-                    {
-                        val = -4,
-                        left = new TreeNode { val = -5 },
-                        right = new TreeNode { val = -3 }
-
-                    }
-                },
-                right = new TreeNode
-                {
-                    val = 0,
-                    right = new TreeNode
-                    {
-                        val = 8,
-                        left = new TreeNode
-                        {
-                            val = 6,
-                            right = new TreeNode { val = 7 }
-                        }
-                    }
-                }
-            };
-
-
-            t2.val = -1;
-            t2.left = new TreeNode { val = -2, right = new TreeNode { val = 4 } };
-            t2.right = new TreeNode
-            {
-                val = 0,
-                right = new TreeNode
-                {
-                    val = 8,
-                    left = new TreeNode
-                    {
-                        val = 6,
-                        right = new TreeNode { val = 7 }
-                    }
-                }
-            };
+            t1 = new TreeNode { val = 1, left = new TreeNode { val = 3, left = new TreeNode { val = 5 } }, right = new TreeNode { val = 2 } };
+            t2 = new TreeNode { val = 2, left = new TreeNode { val = 1, right = new TreeNode { val = 4 } }, right = new TreeNode { val = 3, right = new TreeNode { val = 7 } } };
+            
 
         }
 
