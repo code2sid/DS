@@ -50,7 +50,7 @@ namespace DSPractice
             //var res = o.Reverse("Let's take the contest");
             //var m = o.RodCutProblem(r, 8);
             #endregion Practice Ques
-            var res = o.Merge2Trees(t1, t2);
+            //var res = o.Merge2Trees(t1, t2);
             //var d = o.BTMaxDepth(t1);
             //var nd = o.DFSTreeInvertRecur(t2);
             //var nd = o.DFSTreeInvertIterate(t1);
@@ -61,7 +61,17 @@ namespace DSPractice
             //var s = o.RecSearch(t1, 26);
             //var l = o.InOrderTraversal(t1);
             //var l = o.PreOrderTraversal(t1);
-            var l = o.PostOrderTraversal(t1);
+            //var l = o.PostOrderTraversal(t1);
+
+            Solution s = new Solution(2);
+            s.set(2, 1);
+            s.set(1, 1);
+            s.set(2, 3);
+            s.set(4, 1);
+            Console.Write(s.get(1));
+            Console.Write(s.get(2));
+
+            Console.ReadLine();
         }
 
         static void CreateNodes(ref TreeNode t1, ref TreeNode t2)

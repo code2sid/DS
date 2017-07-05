@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -682,5 +683,53 @@ namespace DSPractice
         public ListNode(int x) { val = x; }
     }
 
+    public class Solution
+    {
+        List<NodeLinkedList> res = new List<NodeLinkedList>();
+        public int cap;
+        public Solution(int capacity)
+        {
+
+            cap = capacity;
+        }
+
+        public int get(int key)
+        {
+            var r = res.Where(i => i.key == key).FirstOrDefault();
+            if (r != null)
+            {
+                res.Remove(r);
+                res.Insert(0, r);
+                return r.val;
+            }
+            return -1;
+        }
+
+        public void set(int key, int value)
+        {
+
+            var r = res.Where(i => i.key == key).FirstOrDefault();
+            if (r != null)
+            {
+                return;
+            }
+
+            if (res.Count == cap)
+            {
+                res.RemoveAt(cap - 1);
+                res.Add(new NodeLinkedList { key = key, val = value });
+            }
+            else
+                res.Add(new NodeLinkedList { key = key, val = value });
+
+        }
+
+    }
+
+    class NodeLinkedList
+    {
+        public int key { get; set; }
+        public int val { get; set; }
+    }
 
 }
