@@ -636,7 +636,61 @@ namespace DSPractice
             return res;
         }
 
+        int m, n;
+        public int NoOfIslands(char[,] grid)
+        {
+            int cntr = 0;
+            m = grid.GetLength(0);
+            n = grid.GetLength(1);
+            if (m == 0)
+                return 0;
+            for (int i = 0; i < m; i++)
+                for (int j = 0; j < n; j++)
+                    if (grid[i, j] == '1')
+                    {
+                        marking(grid, i, j);
+                        ++cntr;
+                    }
+            return cntr;
+        }
 
+        public void marking(char[,] g, int i, int j)
+        {
+            if (i < 0 || j < 0 || i >= m || j >= n || g[i, j] != '1') return;
+            g[i, j] = '0';
+            marking(g, i + 1, j);
+            marking(g, i - 1, j);
+            marking(g, i, j + 1);
+            marking(g, i, j - 1);
+        }
+
+        public ListNode Intersectionof2(ListNode a, ListNode b)
+        {
+            if (a == null && b == null)
+                return null;
+            if (a == null && b != null)
+                return null;
+            if (a != null && b == null)
+                return null;
+
+            if (a.next.Val == b.next.Val)
+                return a.next;
+            // return Intersectionof2(a.next, b.next);
+
+
+
+            while (a.next != null || b.next != null)
+            {
+                if (a.next == null || b.next == null)
+                    return null;
+                if (a.next.Val == b.next.Val)
+                    return a.next;
+                a = a.next;
+                b = b.next;
+            }
+
+            return null;
+        }
 
         #endregion treeNodes
 
@@ -679,8 +733,9 @@ namespace DSPractice
     public class ListNode
     {
         public int val;
+        public string Val { get; set; }
         public ListNode next;
-        public ListNode(int x) { val = x; }
+        public ListNode(int x = 0, string str = "") { val = x; Val = str; }
     }
 
     public class Solution

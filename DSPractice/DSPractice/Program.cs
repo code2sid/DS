@@ -28,7 +28,10 @@ namespace DSPractice
             var o = new Practice();
             var t1 = new TreeNode();
             var t2 = new TreeNode();
+            var n1 = new ListNode(0, "");
+            var n2 = new ListNode(0, "");
             CreateNodes(ref t1, ref t2);
+            CreateNodes(ref n1, ref n2);
             //o.sum(i, 4); o.ptrsum(i, 4); o.sumof2_hash(i, 4);
             //o.Threesum(i);
 
@@ -43,7 +46,7 @@ namespace DSPractice
             //o.IsValid("[");
             //o.LargestContiSum(i);
             //o.LargestContiArray(i);
-            
+
             //o.LargestNonAdjacentSum(j);
             //o.LargestNonContiSum(i);
             //o.LargestNonContiArray(i);
@@ -63,13 +66,23 @@ namespace DSPractice
             //var l = o.PreOrderTraversal(t1);
             //var l = o.PostOrderTraversal(t1);
 
-            Solution s = new Solution(2);
+            /*Solution s = new Solution(2);
             s.set(2, 1);
             s.set(1, 1);
             s.set(2, 3);
             s.set(4, 1);
             Console.Write(s.get(1));
-            Console.Write(s.get(2));
+            Console.Write(s.get(2));*/
+
+            //var n = o.Intersectionof2(n1,n2);
+            var g = new char[,] {{'1','1','1','1','0'},
+            {'1','1','0','1','0'},
+            {'1','1','0','0','0'},
+            {'0','0','0','0','0'}};
+
+            g = new char[,] { { '1' }, { '1' } };
+
+            var c = o.NoOfIslands(g);
 
             Console.ReadLine();
         }
@@ -78,8 +91,14 @@ namespace DSPractice
         {
             t1 = new TreeNode { val = 1, left = new TreeNode { val = 3, left = new TreeNode { val = 5 } }, right = new TreeNode { val = 2 } };
             t2 = new TreeNode { val = 2, left = new TreeNode { val = 1, right = new TreeNode { val = 4 } }, right = new TreeNode { val = 3, right = new TreeNode { val = 7 } } };
-            
 
+
+        }
+
+        static void CreateNodes(ref ListNode n1, ref ListNode n2)
+        {
+            n1 = new ListNode { Val = "a1", next = new ListNode { Val = "a2", next = new ListNode { Val = "c1", next = new ListNode { Val = "c2" } } } };
+            n2 = new ListNode { Val = "b1", next = new ListNode { Val = "b2", next = new ListNode { Val = "c1", next = new ListNode { Val = "c2" } } } };
         }
 
         static void Graph()
