@@ -72,19 +72,28 @@ namespace DSPractice
             s.set(2, 3);
             s.set(4, 1);
             Console.Write(s.get(1));
-            Console.Write(s.get(2));*/
+            Console.Write(s.get(2));
+            Console.ReadLine();
+             */
 
-            //var n = o.Intersectionof2(n1,n2);
+            //var n = o.Intersectionof2(n1, n2);
+
             var g = new char[,] {{'1','1','1','1','0'},
             {'1','1','0','1','0'},
             {'1','1','0','0','0'},
             {'0','0','0','0','0'}};
-
             g = new char[,] { { '1' }, { '1' } };
+            //var c = o.NumIslands(g);
 
-            var c = o.NoOfIslands(g);
+            var iArr = new int[,]{ 
+            { 1, 1, 0, 1 },
+            {0,1,1,0},
+            {0,0,0,1},
+            {1,1,1,0}
+            };
+            //var s = o.shortestpath(iArr);
 
-            Console.ReadLine();
+            var a = o.MoveZeroes(new int[] { 1, 2, 0, 3, 4, 0, 5, 0 });
         }
 
         static void CreateNodes(ref TreeNode t1, ref TreeNode t2)
@@ -97,8 +106,8 @@ namespace DSPractice
 
         static void CreateNodes(ref ListNode n1, ref ListNode n2)
         {
-            n1 = new ListNode { Val = "a1", next = new ListNode { Val = "a2", next = new ListNode { Val = "c1", next = new ListNode { Val = "c2" } } } };
-            n2 = new ListNode { Val = "b1", next = new ListNode { Val = "b2", next = new ListNode { Val = "c1", next = new ListNode { Val = "c2" } } } };
+            n1 = new ListNode { val = 1, next = new ListNode { val = 2 } };
+            n2 = new ListNode { val = 2 };
         }
 
         static void Graph()

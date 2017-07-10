@@ -636,8 +636,13 @@ namespace DSPractice
             return res;
         }
 
+
+
+        #endregion treeNodes
+
+        #region Level 2
         int m, n;
-        public int NoOfIslands(char[,] grid)
+        public int NumIslands(char[,] grid)
         {
             int cntr = 0;
             m = grid.GetLength(0);
@@ -653,7 +658,6 @@ namespace DSPractice
                     }
             return cntr;
         }
-
         public void marking(char[,] g, int i, int j)
         {
             if (i < 0 || j < 0 || i >= m || j >= n || g[i, j] != '1') return;
@@ -666,34 +670,65 @@ namespace DSPractice
 
         public ListNode Intersectionof2(ListNode a, ListNode b)
         {
-            if (a == null && b == null)
-                return null;
-            if (a == null && b != null)
-                return null;
-            if (a != null && b == null)
-                return null;
-
-            if (a.next.Val == b.next.Val)
-                return a.next;
-            // return Intersectionof2(a.next, b.next);
-
-
-
-            while (a.next != null || b.next != null)
+            int alen = NodeLength(a), blen = NodeLength(b);
+            while (alen > blen)
             {
-                if (a.next == null || b.next == null)
-                    return null;
-                if (a.next.Val == b.next.Val)
-                    return a.next;
+                a = a.next;
+                alen--;
+            }
+
+            while (blen > alen)
+            {
+                b = b.next;
+                blen--;
+            }
+
+            while (a.val != b.val)
+            {
                 a = a.next;
                 b = b.next;
             }
 
-            return null;
+            return a;
+        }
+        private int NodeLength(ListNode n)
+        {
+            int l = 0;
+            while (n != null)
+            {
+                l++;
+                n = n.next;
+            }
+
+            return l;
         }
 
-        #endregion treeNodes
+        public int shortestpath(int[,] grid)
+        {
+            m = grid.GetLength(0);
+            n = grid.GetLength(1);
+            for (int i = 0; i < m; i++)
+                for (int j = 0; j < n; j++)
+                {
+                    if (i == 0 && j != 0) grid[i, j] += grid[i, j - 1];
+                    if (i != 0 && j == 0) grid[i, j] += grid[i - 1, j];
+                    if (i != 0 && j != 0) grid[i, j] += Math.Min(grid[i - 1, j], grid[i, j - 1]);
+                }
+            return grid[m - 1, n - 1];
+        }
 
+        public int[] MoveZeroes(int[] nums)
+        {
+            int inspos = 0;
+            foreach (var item in nums)
+                if (item != 0) nums[inspos++] = item;
+            while (inspos < nums.Length)
+                nums[inspos++] = 0;
+
+            return nums;
+        }
+
+        #endregion level 2
     }
 
 
