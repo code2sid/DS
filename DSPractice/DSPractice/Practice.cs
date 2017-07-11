@@ -683,7 +683,7 @@ namespace DSPractice
                 blen--;
             }
 
-            while (a.val != b.val)
+            while (a != b)
             {
                 a = a.next;
                 b = b.next;
@@ -703,7 +703,7 @@ namespace DSPractice
             return l;
         }
 
-        public int shortestpath(int[,] grid)
+        public int ShortestPath(int[,] grid)
         {
             m = grid.GetLength(0);
             n = grid.GetLength(1);
@@ -728,7 +728,80 @@ namespace DSPractice
             return nums;
         }
 
+
         #endregion level 2
+
+        #region level 3
+
+        public int minPalPartion(string str)
+        {
+            int n = str.Length;
+            int[] c = new int[n];
+            bool[,] p = new bool[n, n];
+            int i, j, k, l;
+            for (i = 0; i < n; i++)
+                p[i, i] = true;
+
+
+            for (l = 2; l <= n; l++)
+                for (i = 0; i < n - l + 1; i++)
+                {
+                    j = i + l - 1;
+                    if (l == 2)
+                        p[i, j] = (str[i] == str[j]);
+                    else
+                        p[i, j] = (str[i] == str[j]) && p[i + 1, j - 1];
+                }
+            for (i = 0; i < n; i++)
+            {
+                if (p[0, i])
+                    c[i] = 0;
+                else
+                {
+                    c[i] = int.MaxValue;
+                    for (j = 0; j < i; j++)
+                        if (p[j + 1, i] == true && 1 + c[j] < c[i])
+                            c[i] = 1 + c[j];
+                }
+            }
+
+            return c[n - 1];
+
+
+        }
+        public int BTDiameter(TreeNode t, int ht)
+        {
+            if (t == null)
+            {
+                ht = 0;
+                return 0;
+            }
+
+            int lht = 0, rht = 0;
+            int ldm = 0, rdm = 0;
+
+            ldm = BTDiameter(t.left, lht);
+            rdm = BTDiameter(t.left, rht);
+
+
+            ht = Math.Max(lht, rht) + 1;
+
+            return Math.Max(lht + rht + 1, Math.Max(ldm, rdm));
+        }
+
+        #endregion level 3
+
+        public int BTMaxDiff(TreeNode t, int res)
+        {
+            if (t == null)
+                return 0;
+            if (t.left == null && t.right == null)
+                return t.val;
+            int minVal = Math.Min(BTMaxDiff(t.left, res), BTMaxDiff(t.right, res));
+            res = Math.Max(res, t.val - minVal);
+            return Math.Min(res, minVal);
+
+        }
     }
 
 

@@ -93,12 +93,16 @@ namespace DSPractice
             };
             //var s = o.shortestpath(iArr);
 
-            var a = o.MoveZeroes(new int[] { 1, 2, 0, 3, 4, 0, 5, 0 });
+            //var a = o.MoveZeroes(new int[] { 1, 2, 0, 3, 4, 0, 5, 0 });
+            //////////////////////////////////////////////////////////////////////////////////var p = o.minPalPartion("ababbbabbababa");
+            //////////////////////////////////////////////////////////////////////////////////var h = o.BTDiameter(t1, 0);
+            var m = o.BTMaxDiff(t1, 0);
         }
 
         static void CreateNodes(ref TreeNode t1, ref TreeNode t2)
         {
-            t1 = new TreeNode { val = 1, left = new TreeNode { val = 3, left = new TreeNode { val = 5 } }, right = new TreeNode { val = 2 } };
+            t1 = new TreeNode { val = 8, left = new TreeNode { val = 3, left = new TreeNode { val = 1 }, right = new TreeNode { val = 6, left = new TreeNode { val = 4 }, 
+                right = new TreeNode { val = 7 } } }, right = new TreeNode { val = 10, right = new TreeNode { val = 14, left = new TreeNode { val = 13 } } } };
             t2 = new TreeNode { val = 2, left = new TreeNode { val = 1, right = new TreeNode { val = 4 } }, right = new TreeNode { val = 3, right = new TreeNode { val = 7 } } };
 
 
