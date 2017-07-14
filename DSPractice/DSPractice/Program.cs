@@ -96,7 +96,11 @@ namespace DSPractice
             //var a = o.MoveZeroes(new int[] { 1, 2, 0, 3, 4, 0, 5, 0 });
             //////////////////////////////////////////////////////////////////////////////////var p = o.minPalPartion("ababbbabbababa");
             //////////////////////////////////////////////////////////////////////////////////var h = o.BTDiameter(t1, 0);
-            var m = o.BTMaxDiff(t1, 0);
+            //var m = o.BTMaxDiff(t1, 0);
+
+          
+
+
         }
 
         static void CreateNodes(ref TreeNode t1, ref TreeNode t2)
