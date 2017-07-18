@@ -60,7 +60,7 @@ namespace DSPractice
         List<Song> LoadSongs(ISrc s) { return s.LoadSongs(s); }
         private void NextSong(ISrc s) { int a; if (s.settings.shuffle)a = 1; }
         private void preSong(ISrc s) { int a; if (s.settings.shuffle)a = 1; }
-        private void playPauseSong(Song s);
+        private void playPauseSong(Song s) { }
 
     }
     #endregion Jukebox

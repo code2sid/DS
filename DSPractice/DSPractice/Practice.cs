@@ -788,9 +788,6 @@ namespace DSPractice
 
             return Math.Max(lht + rht + 1, Math.Max(ldm, rdm));
         }
-
-        #endregion level 3
-
         public int BTMaxDiff(TreeNode t, int res)
         {
             if (t == null)
@@ -802,6 +799,39 @@ namespace DSPractice
             return Math.Min(res, minVal);
 
         }
+
+        public int WaterTrap(int[] arr)
+        {
+            int l = arr.Length, water = 0;
+            int[] left = new int[l];
+            int[] right = new int[l];
+
+            left[0] = arr[0];
+            for (int i = 1; i < l; i++)
+                left[i] = Math.Max(left[i - 1], arr[i]);
+
+            right[l - 1] = arr[l - 1];
+            for (int i = l - 2; i >= 0; i--)
+                right[i] = Math.Max(right[i + 1], arr[i]);
+
+            for (int i = 0; i < l; i++)
+                water += Math.Min(left[i], right[i]) - arr[i];
+
+            return water;
+        }
+        public int ThreeFiveTen_1(int target)
+        {
+            Dictionary<int, int> arr = new Dictionary<int, int>();
+            arr.Add(3, 3);
+            arr.Add(5, 5);
+            arr.Add(10, 10);
+            int ways = 0;
+
+
+            return ways;
+        }
+
+        #endregion level 3
     }
 
 
@@ -896,7 +926,7 @@ namespace DSPractice
     }
 
 
-   
+
 
 
 

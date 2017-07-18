@@ -41,6 +41,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Designs.cs" />
     <Compile Include="Graph.cs" />
     <Compile Include="Practice.cs" />
     <Compile Include="Search.cs" />
