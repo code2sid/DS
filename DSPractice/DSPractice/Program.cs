@@ -53,6 +53,8 @@ namespace DSPractice
             //var res = o.Reverse("Let's take the contest");
             //var m = o.RodCutProblem(r, 8);
             #endregion Practice Ques
+
+            #region Trees
             //var res = o.Merge2Trees(t1, t2);
             //var d = o.BTMaxDepth(t1);
             //var nd = o.DFSTreeInvertRecur(t2);
@@ -65,8 +67,9 @@ namespace DSPractice
             //var l = o.InOrderTraversal(t1);
             //var l = o.PreOrderTraversal(t1);
             //var l = o.PostOrderTraversal(t1);
+            #endregion Trees
 
-            /*Solution s = new Solution(2);
+            /*CacheSolution s = new CacheSolution(2);
             s.set(2, 1);
             s.set(1, 1);
             s.set(2, 3);
