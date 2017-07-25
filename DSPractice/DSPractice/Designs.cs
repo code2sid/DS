@@ -66,4 +66,50 @@ namespace DSPractice
     #endregion Jukebox
 
 
+    #region Cache Design
+    public class CacheSolution
+    {
+        List<NodeLinkedList> res = new List<NodeLinkedList>();
+        public int cap;
+        public CacheSolution(int capacity)
+        {
+
+            cap = capacity;
+        }
+
+        public int get(int key)
+        {
+            var r = res.Where(i => i.key == key).FirstOrDefault();
+            if (r != null)
+            {
+                res.Remove(r);
+                res.Insert(0, r);
+                return r.val;
+            }
+            return -1;
+        }
+
+        public void set(int key, int value)
+        {
+
+            var r = res.Where(i => i.key == key).FirstOrDefault();
+            if (r != null)
+            {
+                return;
+            }
+
+            if (res.Count == cap)
+            {
+                res.RemoveAt(cap - 1);
+                res.Add(new NodeLinkedList { key = key, val = value });
+            }
+            else
+                res.Add(new NodeLinkedList { key = key, val = value });
+
+        }
+
+    }
+    #endregion Cahce Design
+
+
 }

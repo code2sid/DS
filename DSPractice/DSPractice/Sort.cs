@@ -20,7 +20,6 @@ namespace DSPractice
             a = b;
             b = t;
         }
-
         public static TreeNode fnSwap(TreeNode t1)
         {
             TreeNode t = t1.left;

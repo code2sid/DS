@@ -769,6 +769,7 @@ namespace DSPractice
 
 
         }
+        
         public int BTDiameter(TreeNode t, int ht)
         {
             if (t == null)
@@ -799,23 +800,24 @@ namespace DSPractice
             return Math.Min(res, minVal);
 
         }
-
         public int WaterTrap(int[] arr)
         {
-            int l = arr.Length, water = 0;
-            int[] left = new int[l];
-            int[] right = new int[l];
+            int len = arr.Length, water = 0;
+            var l = new int[len];
+            var r = new int[len];
 
-            left[0] = arr[0];
-            for (int i = 1; i < l; i++)
-                left[i] = Math.Max(left[i - 1], arr[i]);
+            l[0] = arr[0];
+            r[len - 1] = arr[len - 1];
 
-            right[l - 1] = arr[l - 1];
-            for (int i = l - 2; i >= 0; i--)
-                right[i] = Math.Max(right[i + 1], arr[i]);
+            for (int i = 1; i < len; i++)
+                l[i] = Math.Max(l[i - 1], arr[i]);
 
-            for (int i = 0; i < l; i++)
-                water += Math.Min(left[i], right[i]) - arr[i];
+            for (int i = len - 2; i >= 0; i--)
+                r[i] = Math.Max(r[i + 1], arr[i]);
+
+            for (int i = 0; i < len; i++)
+                water += Math.Min(l[i], r[i]) - arr[i];
+
 
             return water;
         }
@@ -828,12 +830,51 @@ namespace DSPractice
             int ways = 0;
 
 
+
+
             return ways;
         }
 
+        public int[] PanCakeProblem(int[] arr, int pos = 0)
+        {
+            int l = arr.Length - pos;
+            if (l == 1)
+                return arr;
+
+            int max = Math.Max(arr[0], arr[1]);
+
+            if (arr[0] == max)
+                PanCakeReverse(arr, l - 1);
+            else
+                PanCakeReverse(arr, 1);
+
+            if (findMax(arr, l - 1) == arr[l - 1])
+                return PanCakeProblem(arr, ++pos);
+
+            return PanCakeProblem(arr, pos);
+        }
+        int findMax(int[] arr, int pos)
+        {
+            int max = 0;
+            for (int i = 0; i <= pos; i++)
+                if (arr[i] > max)
+                    max = arr[i];
+            return max;
+        }
+        void PanCakeReverse(int[] arr, int pos)
+        {
+            int strt = 0;
+            while (strt < pos)
+            {
+                swap.fnSwap(ref arr[strt], ref arr[pos]);
+                strt++;
+                pos--;
+            }
+        }
+
+
         #endregion level 3
     }
-
 
     public class BSTIterator
     {
@@ -874,49 +915,6 @@ namespace DSPractice
         public string Val { get; set; }
         public ListNode next;
         public ListNode(int x = 0, string str = "") { val = x; Val = str; }
-    }
-
-    public class CacheSolution
-    {
-        List<NodeLinkedList> res = new List<NodeLinkedList>();
-        public int cap;
-        public CacheSolution(int capacity)
-        {
-
-            cap = capacity;
-        }
-
-        public int get(int key)
-        {
-            var r = res.Where(i => i.key == key).FirstOrDefault();
-            if (r != null)
-            {
-                res.Remove(r);
-                res.Insert(0, r);
-                return r.val;
-            }
-            return -1;
-        }
-
-        public void set(int key, int value)
-        {
-
-            var r = res.Where(i => i.key == key).FirstOrDefault();
-            if (r != null)
-            {
-                return;
-            }
-
-            if (res.Count == cap)
-            {
-                res.RemoveAt(cap - 1);
-                res.Add(new NodeLinkedList { key = key, val = value });
-            }
-            else
-                res.Add(new NodeLinkedList { key = key, val = value });
-
-        }
-
     }
 
     class NodeLinkedList

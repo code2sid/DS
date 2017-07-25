@@ -81,7 +81,7 @@ namespace DSPractice
 
             //var n = o.Intersectionof2(n1, n2);
 
-            var g = new char[,] {{'1','1','1','1','0'},{'1','1','0','1','0'},{'1','1','0','0','0'},{'0','0','0','0','0'}};
+            var g = new char[,] { { '1', '1', '1', '1', '0' }, { '1', '1', '0', '1', '0' }, { '1', '1', '0', '0', '0' }, { '0', '0', '0', '0', '0' } };
             g = new char[,] { { '1' }, { '1' } };
             //var c = o.NumIslands(g);
 
@@ -93,15 +93,30 @@ namespace DSPractice
             //var m = o.BTMaxDiff(t1, 0);
 
             var w = o.WaterTrap(new int[] { 0, 1, 0, 2, 1, 0, 1, 3, 2, 1, 2, 1 });
-          
+            var p = o.PanCakeProblem(new int[] { 0, -1, 2, 3, 4, 1, 9, 6 }, 0);
+
 
 
         }
 
         static void CreateNodes(ref TreeNode t1, ref TreeNode t2)
         {
-            t1 = new TreeNode { val = 8, left = new TreeNode { val = 3, left = new TreeNode { val = 1 }, right = new TreeNode { val = 6, left = new TreeNode { val = 4 }, 
-                right = new TreeNode { val = 7 } } }, right = new TreeNode { val = 10, right = new TreeNode { val = 14, left = new TreeNode { val = 13 } } } };
+            t1 = new TreeNode
+            {
+                val = 8,
+                left = new TreeNode
+                {
+                    val = 3,
+                    left = new TreeNode { val = 1 },
+                    right = new TreeNode
+                    {
+                        val = 6,
+                        left = new TreeNode { val = 4 },
+                        right = new TreeNode { val = 7 }
+                    }
+                },
+                right = new TreeNode { val = 10, right = new TreeNode { val = 14, left = new TreeNode { val = 13 } } }
+            };
             t2 = new TreeNode { val = 2, left = new TreeNode { val = 1, right = new TreeNode { val = 4 } }, right = new TreeNode { val = 3, right = new TreeNode { val = 7 } } };
 
 
