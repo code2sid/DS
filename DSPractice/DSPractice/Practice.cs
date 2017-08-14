@@ -10,6 +10,7 @@ namespace DSPractice
 {
     public class Practice
     {
+
         #region Level 1
         public int[] sum(int[] arr, int tar)
         {
@@ -211,7 +212,7 @@ namespace DSPractice
             return M[num / 1000] + C[(num % 1000) / 100] + X[(num % 100) / 10] + I[num % 10];
         }
 
-        String[] LESS_THAN_20 = { "", "One", "Two", "Three", "Four", "Five", "Six", "Seven", "Eight", "Nine", "Ten", "Eleven", "Twelve", "Thirteen", "Fourteen", "Fifteen", 
+        String[] LESS_THAN_20 = { "", "One", "Two", "Three", "Four", "Five", "Six", "Seven", "Eight", "Nine", "Ten", "Eleven", "Twelve", "Thirteen", "Fourteen", "Fifteen",
                                         "Sixteen", "Seventeen", "Eighteen", "Nineteen" };
         String[] TENS = { "", "Ten", "Twenty", "Thirty", "Forty", "Fifty", "Sixty", "Seventy", "Eighty", "Ninety" };
         String[] THOUSANDS = { "", "Thousand", "Million", "Billion" };
@@ -769,7 +770,7 @@ namespace DSPractice
 
 
         }
-        
+
         public int BTDiameter(TreeNode t, int ht)
         {
             if (t == null)
@@ -821,19 +822,7 @@ namespace DSPractice
 
             return water;
         }
-        public int ThreeFiveTen_1(int target)
-        {
-            Dictionary<int, int> arr = new Dictionary<int, int>();
-            arr.Add(3, 3);
-            arr.Add(5, 5);
-            arr.Add(10, 10);
-            int ways = 0;
 
-
-
-
-            return ways;
-        }
 
         public int[] PanCakeProblem(int[] arr, int pos = 0)
         {
@@ -873,7 +862,90 @@ namespace DSPractice
         }
 
 
+
+
+
         #endregion level 3
+
+        public int ThreeFiveTen_1(int target)
+        {
+            Dictionary<int, int> arr = new Dictionary<int, int>();
+            arr.Add(3, 3);
+            arr.Add(5, 5);
+            arr.Add(10, 10);
+            int ways = 0;
+
+
+
+
+            return ways;
+        }
+        public int[,] Skyline(int[,] mat)
+        {
+            return null;
+        }
+
+        public int[] knapsack()
+        {
+            return null;
+        }
+
+        public int[] JumbleNumbers(int[] arr, int k)
+        {
+            var res = new List<int>();
+            int n1, n2, num, j = 0;
+            bool isJumbleNo = true;
+            for (int i = 0; i < arr.Length; i++)
+            {
+                num = arr[i];
+                n1 = num % 10;
+                num = num / 10;
+                isJumbleNo = true;
+
+                while (num > 0)
+                {
+                    n2 = num % 10;
+                    num = num / 10;
+
+                    if (Math.Abs(n1 - n2) != k)
+                    { isJumbleNo = false; break; }
+                    n1 = n2;
+                }
+                if (isJumbleNo)
+                    res.Add(arr[i]);
+            }
+
+
+            return res.ToArray();
+        }
+
+        public int[] JumbleNumbers(int num, int k)
+        {
+            var r = new List<int>();
+            int n = 0, n1 = 0, n2 = 0;
+            bool isJumble = true;
+            for (int i = 0; i <= num; i++)
+            {
+                n = i;
+                if (i > 10)
+                {
+                    n1 = n % 10;
+                    n = n / 10;
+                }
+                isJumble = true;
+                while (n > 0 && i > 10)
+                {
+                    n2 = n % 10;
+                    n = n / 10;
+                    if (Math.Abs(n1 - n2) != k)
+                    { isJumble = false; break; }
+                    n1 = n2;
+                }
+                if (isJumble)
+                    r.Add(i);
+            }
+            return r.ToArray();
+        }
     }
 
     public class BSTIterator

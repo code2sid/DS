@@ -92,11 +92,11 @@ namespace DSPractice
             //////////////////////////////////////////////////////////////////////////////////var h = o.BTDiameter(t1, 0);
             //var m = o.BTMaxDiff(t1, 0);
 
-            var w = o.WaterTrap(new int[] { 0, 1, 0, 2, 1, 0, 1, 3, 2, 1, 2, 1 });
-            var p = o.PanCakeProblem(new int[] { 0, -1, 2, 3, 4, 1, 9, 6 }, 0);
+            //var w = o.WaterTrap(new int[] { 0, 1, 0, 2, 1, 0, 1, 3, 2, 1, 2, 1 });
+            //var p = o.PanCakeProblem(new int[] { 0, -1, 2, 3, 4, 1, 9, 6 }, 0);
 
-
-
+            var jumble = o.JumbleNumbers(new int[] { 12346,12345, 54321,21232, 64321 }, 1);
+            var jum = o.JumbleNumbers(100, 1);
         }
 
         static void CreateNodes(ref TreeNode t1, ref TreeNode t2)
