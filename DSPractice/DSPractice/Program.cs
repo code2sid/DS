@@ -95,8 +95,13 @@ namespace DSPractice
             //var w = o.WaterTrap(new int[] { 0, 1, 0, 2, 1, 0, 1, 3, 2, 1, 2, 1 });
             //var p = o.PanCakeProblem(new int[] { 0, -1, 2, 3, 4, 1, 9, 6 }, 0);
 
-            var jumble = o.JumbleNumbers(new int[] { 12346,12345, 54321,21232, 64321 }, 1);
-            var jum = o.JumbleNumbers(100, 1);
+            //var jumble = o.JumbleNumbers(new int[] { 12346,12345, 54321,21232, 64321 }, 1);
+            //var jum = o.JumbleNumbers(100, 1);
+
+            var k = o.knapsack(50, new int[] { 10, 20, 30 }, new int[] { 60, 100, 120 }, 3);
+
+            SkyLine so = new SkyLine();
+            so.getSkyline(new int[,] { { 2, 9, 10 }, { 3, 6, 15 }, { 5, 12, 12 }, { 13, 16, 10 }, { 13, 16, 10 }, { 15, 17, 5 } });
         }
 
         static void CreateNodes(ref TreeNode t1, ref TreeNode t2)

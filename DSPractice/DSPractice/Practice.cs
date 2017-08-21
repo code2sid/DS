@@ -282,8 +282,8 @@ namespace DSPractice
 
         public int[] LargestContiArray(int[] arr)
         {
-            int sum = 0, maxSum = 0, strt = 0, end = 0, j = 0;
-            int[] res = new int[arr.Length];
+            int sum = 0, maxSum = 0, strt = 0, end = 0;
+            var res = new List<int>();
             for (int i = 0; i < arr.Length; i++)
             {
                 sum += arr[i];
@@ -300,9 +300,9 @@ namespace DSPractice
             }
 
             while (strt != end + 1)
-                res[j++] = arr[strt++];
+                res.Add(arr[strt++]);
 
-            return res;
+            return res.ToArray();
         }
 
         public int LargestNonAdjacentSum(int[] arr)
@@ -330,15 +330,15 @@ namespace DSPractice
         }
         public int[] LargestNonContiArray(int[] arr)
         {
-            int s1 = 0, s2 = 0, j = 0;
-            int[] res = new int[arr.Length];
+            int s1 = 0, s2 = 0;
+            var res = new List<int>();
             for (int i = 0; i < arr.Length; i++)
             {
                 if (arr[i] > 0)
-                    res[j++] = arr[i];
+                    res.Add(arr[i]);
             }
 
-            return res;
+            return res.ToArray();
         }
 
         public string Reverse(string str)
@@ -866,30 +866,7 @@ namespace DSPractice
 
 
         #endregion level 3
-
-        public int ThreeFiveTen_1(int target)
-        {
-            Dictionary<int, int> arr = new Dictionary<int, int>();
-            arr.Add(3, 3);
-            arr.Add(5, 5);
-            arr.Add(10, 10);
-            int ways = 0;
-
-
-
-
-            return ways;
-        }
-        public int[,] Skyline(int[,] mat)
-        {
-            return null;
-        }
-
-        public int[] knapsack()
-        {
-            return null;
-        }
-
+        
         public int[] JumbleNumbers(int[] arr, int k)
         {
             var res = new List<int>();
@@ -945,6 +922,32 @@ namespace DSPractice
                     r.Add(i);
             }
             return r.ToArray();
+        }
+
+        public int ThreeFiveTen_1(int target)
+        {
+            Dictionary<int, int> arr = new Dictionary<int, int>();
+            arr.Add(3, 3);
+            arr.Add(5, 5);
+            arr.Add(10, 10);
+            int ways = 0;
+
+
+
+
+            return ways;
+        }
+      
+
+        public int knapsack(int W, int[] wt, int[] val, int n)
+        {
+            if (n == 0 || W == 0)
+                return 0;
+            if (wt[n - 1] > W)
+               return knapsack(W, wt, val, n - 1);
+
+            else return Math.Max(val[n - 1] + knapsack(W - wt[n - 1], wt, val, n - 1),
+                knapsack(W, wt, val, n - 1));
         }
     }
 
