@@ -23,6 +23,7 @@ namespace DSPractice
         static void Prac()
         {
             int[] i = { -2, -3, 4, -1, -2, 1, 5, -3 };
+            int[] i1 = { -2, -3, 4, -1, -2, 1, 5, -3 };
             int[] j = { 5, 5, 10, 40, 50, 35 };
             int[] r = { 3, 5, 8, 9, 10, 17, 17, 20 };
             var o = new Practice();
@@ -36,7 +37,11 @@ namespace DSPractice
             //o.Threesum(i);
 
             #region Practice Ques
-            //o.Add2Nos(a, b);
+            
+            var a = new ListNode(9,""){next = new ListNode(8,""){next = new ListNode(7,"")}};
+            var b = new ListNode(7,""){next = new ListNode(8,""){next = new ListNode(9,"")}};
+            
+            o.Add2Nos2(a, b);
             //o.Reverse(123453);
             //o.isPalimdrome(1221);
             //o.romanToInt("IMMMM");
@@ -45,7 +50,7 @@ namespace DSPractice
             //o.LongestCommonPrefix(new string[] { "abd", "abe", "abc", "abz" });
             //o.IsValid("[");
             //o.LargestContiSum(i);
-            //o.LargestContiArray(i);
+            //o.IsValid("([)]");
 
             //o.LargestNonAdjacentSum(j);
             //o.LargestNonContiSum(i);

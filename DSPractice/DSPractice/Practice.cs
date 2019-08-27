@@ -10,8 +10,8 @@ namespace DSPractice
 {
     public class Practice
     {
-
         #region Level 1
+
         public int[] sum(int[] arr, int tar)
         {
             int[] sol = new int[2];
@@ -29,7 +29,6 @@ namespace DSPractice
 
                 if (sol[0] > 0 && sol[1] > 0)
                     break;
-
             }
 
             return sol;
@@ -40,7 +39,7 @@ namespace DSPractice
             // if not sorted error, n if we sort then we changed the expected result.
             // good in case where we need numbers only and not the index.
             int ptr1 = 0, ptr2 = arr.Length - 1;
-            int[] indexes = { 0 };
+            int[] indexes = {0};
             while (ptr1 <= ptr2)
             {
                 if (arr[ptr1] + arr[ptr2] > tar)
@@ -48,8 +47,10 @@ namespace DSPractice
                 else if (arr[ptr1] + arr[ptr2] < tar)
                     ptr1++;
                 else if (arr[ptr1] + arr[ptr2] == tar)
-                { indexes = new int[] { ptr1, ptr2 }; break; }
-
+                {
+                    indexes = new int[] {ptr1, ptr2};
+                    break;
+                }
             }
 
             return indexes;
@@ -92,16 +93,18 @@ namespace DSPractice
                     if (threeSum == 0 && isDulpicate(res, x, arr[y], arr[z]))
                     {
                         var r = new List<int>();
-                        r.Add(x); r.Add(arr[y]); r.Add(arr[z]);
+                        r.Add(x);
+                        r.Add(arr[y]);
+                        r.Add(arr[z]);
                         res.Add(r);
-                        y++; z--;
+                        y++;
+                        z--;
                     }
                     else if (threeSum < 0)
                         y++;
                     else
                         z--;
                 }
-
             }
 
             return res;
@@ -145,12 +148,48 @@ namespace DSPractice
                     r.next = new ListNode(1);
                     r.val %= 10;
                 }
+
                 sum = 0;
             }
 
 
             return res.next;
+        }
 
+        public ListNode Add2Nos2(ListNode a, ListNode b)
+        {
+            var res = new ListNode(0);
+            var r = res;
+            var sum = 0;
+            while (a != null || b != null)
+            {
+                if (a != null)
+                {
+                    sum += a.val;
+                    a = a.next;
+                }
+
+                if (b != null)
+                {
+                    sum += b.val;
+                    b = b.next;
+                }
+
+                sum += r.next?.val ?? 0;
+                
+                r.next = new ListNode(sum);
+                r = r.next;
+                if (sum / 10 == 1)
+                {
+                    r.next = new ListNode(1,"");
+                    r.val %= 10;
+                }
+
+                sum = 0;
+
+            }
+
+            return res.next;
         }
 
         public int Reverse(int a)
@@ -161,10 +200,11 @@ namespace DSPractice
                 r = r * 10 + a % 10;
                 a = a / 10;
             }
+
             if (r > int.MaxValue || r < int.MinValue)
                 return 0;
             else
-                return (int)r;
+                return (int) r;
         }
 
         public bool isPalimdrome(int x)
@@ -177,6 +217,7 @@ namespace DSPractice
                 hr = hr * 10 + x % 10;
                 x = x / 10;
             }
+
             return (x == hr) || (x == hr / 10);
         }
 
@@ -205,17 +246,22 @@ namespace DSPractice
 
         public string intToRoman(int num)
         {
-            string[] M = { "", "M", "MM", "MMM" };
-            string[] C = { "", "C", "CC", "CCC", "CD", "D", "DC", "DCC", "DCCC", "CM" };
-            string[] X = { "", "X", "XX", "XXX", "XL", "L", "LX", "LXX", "LXXX", "XC" };
-            string[] I = { "", "I", "II", "III", "IV", "V", "VI", "VII", "VIII", "IX" };
+            string[] M = {"", "M", "MM", "MMM"};
+            string[] C = {"", "C", "CC", "CCC", "CD", "D", "DC", "DCC", "DCCC", "CM"};
+            string[] X = {"", "X", "XX", "XXX", "XL", "L", "LX", "LXX", "LXXX", "XC"};
+            string[] I = {"", "I", "II", "III", "IV", "V", "VI", "VII", "VIII", "IX"};
             return M[num / 1000] + C[(num % 1000) / 100] + X[(num % 100) / 10] + I[num % 10];
         }
 
-        String[] LESS_THAN_20 = { "", "One", "Two", "Three", "Four", "Five", "Six", "Seven", "Eight", "Nine", "Ten", "Eleven", "Twelve", "Thirteen", "Fourteen", "Fifteen",
-                                        "Sixteen", "Seventeen", "Eighteen", "Nineteen" };
-        String[] TENS = { "", "Ten", "Twenty", "Thirty", "Forty", "Fifty", "Sixty", "Seventy", "Eighty", "Ninety" };
-        String[] THOUSANDS = { "", "Thousand", "Million", "Billion" };
+        String[] LESS_THAN_20 =
+        {
+            "", "One", "Two", "Three", "Four", "Five", "Six", "Seven", "Eight", "Nine", "Ten", "Eleven", "Twelve",
+            "Thirteen", "Fourteen", "Fifteen",
+            "Sixteen", "Seventeen", "Eighteen", "Nineteen"
+        };
+
+        String[] TENS = {"", "Ten", "Twenty", "Thirty", "Forty", "Fifty", "Sixty", "Seventy", "Eighty", "Ninety"};
+        String[] THOUSANDS = {"", "Thousand", "Million", "Billion"};
 
         public string intToEngWords(int num)
         {
@@ -253,7 +299,7 @@ namespace DSPractice
             string sb = strs[0];
             //StringBuilder sb = new StringBuilder(strs[0]);
             for (int i = 1; i < strs.Length; i++)
-                while (strs[i].IndexOf(sb) != 0)
+                while (strs[i].IndexOf(sb) > -1)
                     sb = sb.Substring(0, sb.Length - 1);
 
             return sb;
@@ -261,9 +307,26 @@ namespace DSPractice
 
         public bool IsValid(string s)
         {
-            if (s.Contains("["))
-                return false;
-            return true;
+            var b=new Dictionary<string,int>();
+            b.Add("round",0);
+            b.Add("square",0);
+            b.Add("curles",0);
+
+            foreach (char c in s)
+            {
+                switch (c)
+                {
+                    case '(': b["round"]++;break;
+                    case ')': b["round"]--;break;
+                    case '[': b["square"]++;break;
+                    case ']': b["square"]--;break;
+                    case '{': b["curles"]++;break;
+                    case '}': b["curles"]--;break;
+                    default: break;
+                }
+            }
+
+            return (b["round"] + b["square"] + b["curles"]) == 0;
         }
 
         public int LargestContiSum(int[] arr)
@@ -277,6 +340,7 @@ namespace DSPractice
                 if (maxSum < sum)
                     maxSum = sum;
             }
+
             return maxSum;
         }
 
@@ -292,6 +356,7 @@ namespace DSPractice
                     sum = 0;
                     strt = i + 1;
                 }
+
                 if (maxSum < sum)
                 {
                     maxSum = sum;
@@ -314,6 +379,7 @@ namespace DSPractice
                 inc = exc + arr[i];
                 new_exc = exc;
             }
+
             return inc > exc ? inc : exc;
         }
 
@@ -328,6 +394,7 @@ namespace DSPractice
 
             return maxSum;
         }
+
         public int[] LargestNonContiArray(int[] arr)
         {
             int s1 = 0, s2 = 0;
@@ -355,6 +422,7 @@ namespace DSPractice
 
             return res.ToString().Trim();
         }
+
         #endregion Level 1
 
         internal int RodCutProblem(int[] price, int n)
@@ -366,10 +434,10 @@ namespace DSPractice
             for (int i = 0; i < n; i++)
                 maxSum = Math.Max(maxSum, price[i] + RodCutProblem(price, n - i - 1));
             return maxSum;
-
         }
 
         #region treeNodes
+
         public TreeNode Merge2Trees(TreeNode a, TreeNode b)
         {
             if (a == null && b == null) return null;
@@ -383,6 +451,7 @@ namespace DSPractice
 
             return a;
         }
+
         internal int BTMaxDepth(TreeNode t)
         {
             if (t == null) return 0;
@@ -400,16 +469,15 @@ namespace DSPractice
                 size = q.Count;
                 for (int i = 0; i < size; i++)
                 {
-                    var c = (TreeNode)q.Dequeue();
+                    var c = (TreeNode) q.Dequeue();
                     if (c.left != null) q.Enqueue(c.left);
                     if (c.right != null) q.Enqueue(c.right);
                 }
             }
 
             return cnt;
-
-
         }
+
         internal TreeNode DFSTreeInvertRecur(TreeNode root)
         {
             if (root == null)
@@ -420,16 +488,15 @@ namespace DSPractice
             root.right = DFSTreeInvertRecur(l);
 
             return root;
-
-
         }
+
         internal TreeNode DFSTreeInvertIterate(TreeNode root)
         {
             Stack s = new Stack();
             s.Push(root);
             while (s.Count != 0)
             {
-                var t = (TreeNode)s.Pop();
+                var t = (TreeNode) s.Pop();
                 var temp = t.left;
                 t.left = t.right;
                 t.right = temp;
@@ -439,15 +506,17 @@ namespace DSPractice
                 if (t.right != null)
                     s.Push(t.right);
             }
+
             return root;
         }
+
         internal TreeNode BFSTreeInvertIterate(TreeNode root)
         {
             var q = new Queue();
             q.Enqueue(root);
             while (q.Count != 0)
             {
-                var t = (TreeNode)q.Dequeue();
+                var t = (TreeNode) q.Dequeue();
                 var temp = t.left;
                 t.left = t.right;
                 t.right = temp;
@@ -457,11 +526,13 @@ namespace DSPractice
                 if (t.right != null)
                     q.Enqueue(t.right);
             }
+
             return root;
         }
 
         //tree traversal
         TreeNode result;
+
         void isT2(TreeNode t1, int val)
         {
             if (t1 == null)
@@ -471,9 +542,11 @@ namespace DSPractice
                 result = t1;
                 return;
             }
+
             isT2(t1.left, val);
             isT2(t1.right, val);
         }
+
         bool isSubtree2(TreeNode result, TreeNode b)
         {
             if (result == null && b == null)
@@ -516,15 +589,18 @@ namespace DSPractice
                 s = new List<int>();
                 for (int i = 0; i < level; i++)
                 {
-                    var c = (TreeNode)q.Dequeue();
+                    var c = (TreeNode) q.Dequeue();
                     s.Add(c.val);
                     if (c.left != null) q.Enqueue(c.left);
                     if (c.right != null) q.Enqueue(c.right);
                 }
+
                 res.Add(s);
             }
+
             return res;
         }
+
         public IList<IList<int>> BTReverseLevelOrderTraversal(TreeNode t)
         {
             var res = new List<IList<int>>();
@@ -539,13 +615,15 @@ namespace DSPractice
                 s = new List<int>();
                 for (int i = 0; i < level; i++)
                 {
-                    var c = (TreeNode)q.Dequeue();
+                    var c = (TreeNode) q.Dequeue();
                     s.Add(c.val);
                     if (c.left != null) q.Enqueue(c.left);
                     if (c.right != null) q.Enqueue(c.right);
                 }
+
                 res.Insert(0, s);
             }
+
             return res;
         }
 
@@ -558,19 +636,18 @@ namespace DSPractice
             q.Enqueue(t);
             while (q.Count != 0)
             {
-                var c = (TreeNode)q.Dequeue();
+                var c = (TreeNode) q.Dequeue();
                 if (c.val == val)
                     return c;
                 else if (val > c.val && c.right != null)
                     q.Enqueue(c.right);
                 else if (val < c.val && c.left != null)
                     q.Enqueue(c.left);
-
             }
 
             return res;
-
         }
+
         public TreeNode RecSearch(TreeNode t, int val)
         {
             if (t == null || t.val == val)
@@ -579,7 +656,6 @@ namespace DSPractice
                 return RecSearch(t.right, val);
 
             return RecSearch(t.left, val);
-
         }
 
         public List<int> InOrderTraversal(TreeNode t)
@@ -597,13 +673,15 @@ namespace DSPractice
                     s.Push(cur);
                     cur = cur.left;
                 }
-                cur = (TreeNode)s.Pop();
+
+                cur = (TreeNode) s.Pop();
                 res.Add(cur.val);
                 cur = cur.right;
             }
-            return res;
 
+            return res;
         }
+
         public List<int> PreOrderTraversal(TreeNode t)
         {
             var res = new List<int>();
@@ -613,13 +691,15 @@ namespace DSPractice
             s.Push(t);
             while (s.Count != 0)
             {
-                var c = (TreeNode)s.Pop();
+                var c = (TreeNode) s.Pop();
                 res.Add(c.val);
                 if (c.right != null) s.Push(c.right);
                 if (c.left != null) s.Push(c.left);
             }
+
             return res;
         }
+
         public List<int> PostOrderTraversal(TreeNode t)
         {
             var res = new List<int>();
@@ -629,20 +709,21 @@ namespace DSPractice
             s.Push(t);
             while (s.Count != 0)
             {
-                var c = (TreeNode)s.Pop();
+                var c = (TreeNode) s.Pop();
                 res.Insert(0, c.val);
                 if (c.left != null) s.Push(c.left);
                 if (c.right != null) s.Push(c.right);
             }
+
             return res;
         }
-
-
 
         #endregion treeNodes
 
         #region Level 2
+
         int m, n;
+
         public int NumIslands(char[,] grid)
         {
             int cntr = 0;
@@ -651,14 +732,16 @@ namespace DSPractice
             if (m == 0)
                 return 0;
             for (int i = 0; i < m; i++)
-                for (int j = 0; j < n; j++)
-                    if (grid[i, j] == '1')
-                    {
-                        marking(grid, i, j);
-                        ++cntr;
-                    }
+            for (int j = 0; j < n; j++)
+                if (grid[i, j] == '1')
+                {
+                    marking(grid, i, j);
+                    ++cntr;
+                }
+
             return cntr;
         }
+
         public void marking(char[,] g, int i, int j)
         {
             if (i < 0 || j < 0 || i >= m || j >= n || g[i, j] != '1') return;
@@ -692,6 +775,7 @@ namespace DSPractice
 
             return a;
         }
+
         private int NodeLength(ListNode n)
         {
             int l = 0;
@@ -709,12 +793,13 @@ namespace DSPractice
             m = grid.GetLength(0);
             n = grid.GetLength(1);
             for (int i = 0; i < m; i++)
-                for (int j = 0; j < n; j++)
-                {
-                    if (i == 0 && j != 0) grid[i, j] += grid[i, j - 1];
-                    if (i != 0 && j == 0) grid[i, j] += grid[i - 1, j];
-                    if (i != 0 && j != 0) grid[i, j] += Math.Min(grid[i - 1, j], grid[i, j - 1]);
-                }
+            for (int j = 0; j < n; j++)
+            {
+                if (i == 0 && j != 0) grid[i, j] += grid[i, j - 1];
+                if (i != 0 && j == 0) grid[i, j] += grid[i - 1, j];
+                if (i != 0 && j != 0) grid[i, j] += Math.Min(grid[i - 1, j], grid[i, j - 1]);
+            }
+
             return grid[m - 1, n - 1];
         }
 
@@ -722,13 +807,13 @@ namespace DSPractice
         {
             int inspos = 0;
             foreach (var item in nums)
-                if (item != 0) nums[inspos++] = item;
+                if (item != 0)
+                    nums[inspos++] = item;
             while (inspos < nums.Length)
                 nums[inspos++] = 0;
 
             return nums;
         }
-
 
         #endregion level 2
 
@@ -745,14 +830,15 @@ namespace DSPractice
 
 
             for (l = 2; l <= n; l++)
-                for (i = 0; i < n - l + 1; i++)
-                {
-                    j = i + l - 1;
-                    if (l == 2)
-                        p[i, j] = (str[i] == str[j]);
-                    else
-                        p[i, j] = (str[i] == str[j]) && p[i + 1, j - 1];
-                }
+            for (i = 0; i < n - l + 1; i++)
+            {
+                j = i + l - 1;
+                if (l == 2)
+                    p[i, j] = (str[i] == str[j]);
+                else
+                    p[i, j] = (str[i] == str[j]) && p[i + 1, j - 1];
+            }
+
             for (i = 0; i < n; i++)
             {
                 if (p[0, i])
@@ -767,8 +853,6 @@ namespace DSPractice
             }
 
             return c[n - 1];
-
-
         }
 
         public int BTDiameter(TreeNode t, int ht)
@@ -790,6 +874,7 @@ namespace DSPractice
 
             return Math.Max(lht + rht + 1, Math.Max(ldm, rdm));
         }
+
         public int BTMaxDiff(TreeNode t, int res)
         {
             if (t == null)
@@ -799,8 +884,8 @@ namespace DSPractice
             int minVal = Math.Min(BTMaxDiff(t.left, res), BTMaxDiff(t.right, res));
             res = Math.Max(res, t.val - minVal);
             return Math.Min(res, minVal);
-
         }
+
         public int WaterTrap(int[] arr)
         {
             int len = arr.Length, water = 0;
@@ -842,6 +927,7 @@ namespace DSPractice
 
             return PanCakeProblem(arr, pos);
         }
+
         int findMax(int[] arr, int pos)
         {
             int max = 0;
@@ -850,6 +936,7 @@ namespace DSPractice
                     max = arr[i];
             return max;
         }
+
         void PanCakeReverse(int[] arr, int pos)
         {
             int strt = 0;
@@ -861,12 +948,8 @@ namespace DSPractice
             }
         }
 
-
-
-
-
         #endregion level 3
-        
+
         public int[] JumbleNumbers(int[] arr, int k)
         {
             var res = new List<int>();
@@ -885,9 +968,14 @@ namespace DSPractice
                     num = num / 10;
 
                     if (Math.Abs(n1 - n2) != k)
-                    { isJumbleNo = false; break; }
+                    {
+                        isJumbleNo = false;
+                        break;
+                    }
+
                     n1 = n2;
                 }
+
                 if (isJumbleNo)
                     res.Add(arr[i]);
             }
@@ -909,18 +997,25 @@ namespace DSPractice
                     n1 = n % 10;
                     n = n / 10;
                 }
+
                 isJumble = true;
                 while (n > 0 && i > 10)
                 {
                     n2 = n % 10;
                     n = n / 10;
                     if (Math.Abs(n1 - n2) != k)
-                    { isJumble = false; break; }
+                    {
+                        isJumble = false;
+                        break;
+                    }
+
                     n1 = n2;
                 }
+
                 if (isJumble)
                     r.Add(i);
             }
+
             return r.ToArray();
         }
 
@@ -933,21 +1028,20 @@ namespace DSPractice
             int ways = 0;
 
 
-
-
             return ways;
         }
-      
+
 
         public int knapsack(int W, int[] wt, int[] val, int n)
         {
             if (n == 0 || W == 0)
                 return 0;
             if (wt[n - 1] > W)
-               return knapsack(W, wt, val, n - 1);
+                return knapsack(W, wt, val, n - 1);
 
-            else return Math.Max(val[n - 1] + knapsack(W - wt[n - 1], wt, val, n - 1),
-                knapsack(W, wt, val, n - 1));
+            else
+                return Math.Max(val[n - 1] + knapsack(W - wt[n - 1], wt, val, n - 1),
+                    knapsack(W, wt, val, n - 1));
         }
     }
 
@@ -955,6 +1049,7 @@ namespace DSPractice
     {
         public TreeNode BST { get; set; }
         public int MinVal { get; set; }
+
         public BSTIterator(TreeNode root)
         {
             BST = root;
@@ -989,7 +1084,12 @@ namespace DSPractice
         public int val;
         public string Val { get; set; }
         public ListNode next;
-        public ListNode(int x = 0, string str = "") { val = x; Val = str; }
+
+        public ListNode(int x = 0, string str = "")
+        {
+            val = x;
+            Val = str;
+        }
     }
 
     class NodeLinkedList
@@ -997,10 +1097,4 @@ namespace DSPractice
         public int key { get; set; }
         public int val { get; set; }
     }
-
-
-
-
-
-
 }
