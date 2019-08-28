@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 using System.Linq;
 
@@ -5,6 +6,7 @@ namespace DSPractice
 {
     public class CrackingTheCode
     {
+        ///////////////////////////////////////////////////////////////////////////////////////// day 1
         public List<IList<int>> ReturnDistinctPairs(int[] arr, int key)
         {
             if (arr.Length == 0)
@@ -31,7 +33,6 @@ namespace DSPractice
             return list;
         }
 
-
         public string[] ReturnPossibleSubStrings(string bigString, string smallString)
         {
             return null;
@@ -44,19 +45,19 @@ namespace DSPractice
 
             var hash = new Dictionary<char,int>();
 
-            var charArray = ransomNote.ToCharArray();
-            for (int i = 0; i < charArray.Length - 1; i++)
+            var ransomNoteArray = ransomNote.ToCharArray();
+            for (int i = 0; i < ransomNoteArray.Length - 1; i++)
             {
-                if (hash.ContainsKey(charArray[i]))
+                if (hash.ContainsKey(ransomNoteArray[i]))
                 {
-                    hash[charArray[i]]++;
+                    hash[ransomNoteArray[i]]++;
                 }
                 else
                 {
-                    hash.Add(charArray[i], 1);
+                    hash.Add(ransomNoteArray[i], 1);
                 }
             }
-
+            
             foreach (var h in hash.Keys)
             {
                 if (magazine.Contains(h))
@@ -68,9 +69,18 @@ namespace DSPractice
             return !hash.Values.Any(v => v > 0);
         }
 
-        public string[] ReturnStringPermutations(string s)
+        ///////////////////////////////////////////////////////////////////////////////////////// day 2
+        public void ReturnStringAllPermutations(string s, int l, int lastIndex)
         {
-            return null;
+            if (l == lastIndex)
+            Console.WriteLine(s);
+
+            for (var i = l; i <=lastIndex; i++)
+            {
+                s = swap.fnSwap(s, l, i);
+                ReturnStringAllPermutations(s, l + 1, lastIndex);
+                s = swap.fnSwap(s, l, i);
+            }
         }
 
         public double ReturnMedian(int[] array)
@@ -84,10 +94,23 @@ namespace DSPractice
             return null;
         }
 
-        public bool hasUniqueElements(string s)
+        ///////////////////////////////////////////////////////////////////////////////////////// day 3
+        public bool HasUniqueElements(string s)
         {
             // w/o additional data structures
             return false;
         }
+
+        public bool IsPermutationOfOtherString(string str1, string str2)
+        {
+            return false;
+        }
+
+        public string URLify(string str)
+        {
+            return null;
+        }
+        
+        
     }
 }

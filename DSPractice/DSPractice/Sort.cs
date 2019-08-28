@@ -20,6 +20,17 @@ namespace DSPractice
             a = b;
             b = t;
         }
+        
+        public static string fnSwap(string s, int pos1, int pos2)
+        {
+            var chArray = s.ToCharArray();
+            var t = chArray[pos1];
+            chArray[pos1] = chArray[pos2];
+            chArray[pos2] = t;
+
+            return new string(chArray); 
+        }
+
         public static TreeNode fnSwap(TreeNode t1)
         {
             TreeNode t = t1.left;

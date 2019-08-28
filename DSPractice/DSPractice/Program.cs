@@ -11,13 +11,24 @@ namespace DSPractice
     {
         static void Main(string[] args)
         {
-            Prac();
+            //Prac();
             //Graph();
             //search();
             //sort();
             //GetHastTable();
+            CrackingCode();
+        }
 
-
+        private static void CrackingCode()
+        {
+            var o = new CrackingTheCode();
+            
+            const string permutationString = "ABC";
+            o.ReturnStringAllPermutations(permutationString, 0, permutationString.Length - 1);
+            var r = o.ReturnDistinctPairs(new[] {1, 3, 5, 9, 7}, 2);
+            var magazine = new[] {'T','h','i','s',' ','a','r','n','o','m','e'};
+            var boolres = o.IsMagazineRansomNote(magazine, "This is a ransom note");
+            Console.ReadLine();
         }
 
         static void Prac()
