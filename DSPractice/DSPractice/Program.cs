@@ -42,16 +42,16 @@ namespace DSPractice
                 {1, 1, 1, 1},
                 {2, 2, 2, 2},
                 {3, 3, 3, 3},
-                {4, 4, 4, 4}
+                {4, 4, 4, 4}    
             };
             var resMatrix = CrackingTheCode.ZeroMatrix(matrix);
             var head = new CrackingTheCode.Node("1",new CrackingTheCode.Node("2",new CrackingTheCode.Node("3",
                 new CrackingTheCode.Node("4", new CrackingTheCode.Node("5", new CrackingTheCode.Node("6", null))))));
             resMatrix = CrackingTheCode.RotateMatrix(matrix);
             var n = CrackingTheCode.DeleteMiddleNode(head);
-            
-            
-            
+            resBool = CrackingTheCode.IsOneEditAway("sidd", "sidh");
+            var resIntArr = o.ReturnElementsInCommon(new[] {11, 23, 25, 55, 66, 77, 990}, new[] {44, 88, 99, 11, 25});
+            resBool = o.HasUniqueElements("sidhart");
             Console.ReadLine();
         }
 

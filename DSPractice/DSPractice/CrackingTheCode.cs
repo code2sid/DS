@@ -1,4 +1,5 @@
 using System;
+using System.Collections.Concurrent;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -86,7 +87,7 @@ namespace DSPractice
 
         ///////////////////////////////////////////////////////////////////////////////////////// day 2
 
-        #region day2-2pendings
+        #region day2-ReturnMedian
 
         public void ReturnStringAllPermutations(string s, int l, int lastIndex)
         {
@@ -109,19 +110,37 @@ namespace DSPractice
         public int[] ReturnElementsInCommon(int[] sortedArray1, int[] sortedArray2)
         {
             // same in length and distinct elements.
-            return null;
+            var d = sortedArray1.ToDictionary(k => k, v => 0);
+            foreach (var s in sortedArray2)
+            {
+                if (d.ContainsKey(s))
+                    d[s] += 1;
+            }
+
+            return d.Where(kvp => kvp.Value > 0).Select(s => s.Key).ToArray();
         }
 
         #endregion
 
         ///////////////////////////////////////////////////////////////////////////////////////// day 3
 
-        #region day3-2pendings
+        #region day3-URLify
 
         public bool HasUniqueElements(string s)
         {
             // w/o additional data structures
-            return false;
+            for (var i = 0; i < s.Length; i++)
+            {
+                for (var j = i+1; j < s.Length; j++)
+                {
+                    if (s[i] == s[j])
+                    {
+                        return false;
+                    }
+                }
+            }
+            
+            return true;
         }
 
         public bool IsPermutationOfOtherString(string str1, string str2)
@@ -140,7 +159,7 @@ namespace DSPractice
 
         ///////////////////////////////////////////////////////////////////////////////////////// day 4
 
-        #region day4-isOneEdit
+        #region day4-Completed
 
         private readonly Dictionary<string, string> _allPalindromePermutations = new Dictionary<string, string>();
         private readonly List<string> _allPermutations = new List<string>();
@@ -189,9 +208,29 @@ namespace DSPractice
             }
         }
 
-        public bool IsOneEditAway(string s1, string s2)
+        public static bool IsOneEditAway(string original, string edited)
         {
-            return false;
+            var d = new ConcurrentDictionary<char, int>();
+            foreach (var ch in original.ToCharArray())
+            {
+                d.AddOrUpdate(ch, 1, (key, existingValue) => existingValue + 1);
+            }
+            
+            foreach (var ch in edited.ToCharArray())
+            {
+                if (!d.ContainsKey(ch))
+                    d.AddOrUpdate(ch, 1, (k, val) => val++);
+            }
+
+            foreach (var k in d.Keys)
+            {
+                if (original.Contains(k))
+                {
+                    d[k] -= 1;
+                }
+            }
+
+            return d.Values.Sum(k => k) == 1;
         }
         #endregion
 
@@ -384,7 +423,7 @@ namespace DSPractice
 
         ///////////////////////////////////////////////////////////////////////////////////////// day 7
 
-        #region day7
+        #region day7-2Pendings
 
         public class Node
         {
