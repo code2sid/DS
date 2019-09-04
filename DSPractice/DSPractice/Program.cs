@@ -22,14 +22,36 @@ namespace DSPractice
         private static void CrackingCode()
         {
             var o = new CrackingTheCode();
-            
+
             const string permutationString = "ABC";
             o.ReturnStringAllPermutations(permutationString, 0, permutationString.Length - 1);
-            var r = o.ReturnDistinctPairs(new[] {1, 3, 5, 9, 7}, 2);
-            var magazine = new[] {'T','h','i','s',' ','a','r','n','o','m','e'};
-            //var boolres = o.IsMagazineRansomNote(magazine, "This is a ransom note");
-            var isPP = o.ReturnAllPalindromePermutations("tact coa");
-            var isPOS = o.IsPermutationOfOtherString("abc", "cbb");
+            var r = CrackingTheCode.ReturnDistinctPairs(new[] {1, 3, 5, 9, 7}, 2);
+            var magazine = new[] {'t','h','i','s',' ','a','r','n','o','m','e'};
+            var resBool = o.IsMagazineRansomNote(magazine, "this is a ransom note");
+            var resDic = o.ReturnAllPalindromePermutations("tact coa");
+            resBool = o.IsPermutationOfOtherString("abc", "cbb");
+            var resStrArray = o.ReturnPossibleSubStrings("abcdbcadcdabdabc", "abcd");
+            var resStr = o.NaggaroVariableProblem("thisIsAVariable");
+            resStr = o.NaggaroVariableProblem("this_is_a_variable");
+            resStr = o.NaggaroStringCompression("bbbaaaeeedddcccaa");
+            resStr = o.RepeatStringCompression("bbbaaaeeedddcccaabbbbb");
+            var resInt = o.StaircaseProblem(4, 2);
+            resInt = CrackingTheCode.WaterTrap(new[] {3, 0, 0, 2, 0, 4});
+            var matrix = new[,]
+            {
+                {1, 1, 1, 1},
+                {2, 2, 2, 2},
+                {3, 3, 3, 3},
+                {4, 4, 4, 4}
+            };
+            var resMatrix = CrackingTheCode.ZeroMatrix(matrix);
+            var head = new CrackingTheCode.Node("1",new CrackingTheCode.Node("2",new CrackingTheCode.Node("3",
+                new CrackingTheCode.Node("4", new CrackingTheCode.Node("5", new CrackingTheCode.Node("6", null))))));
+            resMatrix = CrackingTheCode.RotateMatrix(matrix);
+            var n = CrackingTheCode.DeleteMiddleNode(head);
+            
+            
+            
             Console.ReadLine();
         }
 
