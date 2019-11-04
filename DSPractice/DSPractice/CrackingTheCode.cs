@@ -1,7 +1,11 @@
 using System;
+using System.Collections;
 using System.Collections.Concurrent;
 using System.Collections.Generic;
+using System.Diagnostics.PerformanceData;
 using System.Linq;
+using System.Runtime.InteropServices.ComTypes;
+using System.Runtime.InteropServices.WindowsRuntime;
 using System.Text;
 
 namespace DSPractice
@@ -83,6 +87,17 @@ namespace DSPractice
             return !hash.Values.Any(v => v > 0);
         }
 
+        public bool IsMagazineRansomNote2(char[] m, string r)
+        {
+            foreach (var ch in m)
+            {
+                r = r.Replace(ch.ToString(), "");
+                if (r.Length == 0)
+                    return true;
+            }
+
+            return r.Length == 0;
+        }
         #endregion
 
         ///////////////////////////////////////////////////////////////////////////////////////// day 2
@@ -131,7 +146,7 @@ namespace DSPractice
             // w/o additional data structures
             for (var i = 0; i < s.Length; i++)
             {
-                for (var j = i+1; j < s.Length; j++)
+                for (var j = i + 1; j < s.Length; j++)
                 {
                     if (s[i] == s[j])
                     {
@@ -139,7 +154,7 @@ namespace DSPractice
                     }
                 }
             }
-            
+
             return true;
         }
 
@@ -215,7 +230,7 @@ namespace DSPractice
             {
                 d.AddOrUpdate(ch, 1, (key, existingValue) => existingValue + 1);
             }
-            
+
             foreach (var ch in edited.ToCharArray())
             {
                 if (!d.ContainsKey(ch))
@@ -232,6 +247,7 @@ namespace DSPractice
 
             return d.Values.Sum(k => k) == 1;
         }
+
         #endregion
 
         ///////////////////////////////////////////////////////////////////////////////////////// day 5
@@ -265,80 +281,59 @@ namespace DSPractice
 
         public string NaggaroVariableProblem(string s)
         {
-            var c = s.ToCharArray();
-            var o = new List<char>();
+            
+            var sb = new StringBuilder();
             const int bigSmallDif = (int) 'a' - (int) 'A';
 
-            for (int i = 0; i < c.Length; i++)
+            for (var i = 0; i < s.Length; i++)
             {
-                if (c[i] == '_')
+                if (s[i] == '_')
                 {
-                    o.Add((char) ((int) c[i + 1] - bigSmallDif));
+                    sb.Append((char) ((int) s[i + 1] - bigSmallDif));
                     i++;
                 }
 
-                else if ((int) c[i] < 97)
+                else if ((int) s[i] < 97)
                 {
-                    o.Add('_');
-                    o.Add((char) ((int) c[i] + bigSmallDif));
+                    sb.Append('_');
+                    sb.Append((char) ((int) s[i] + bigSmallDif));
                 }
 
                 else
                 {
-                    o.Add(c[i]);
+                    sb.Append(s[i]);
                 }
             }
 
-            return new string(o.ToArray());
+            return sb.ToString();
         }
 
         public string NaggaroStringCompression(string s)
         {
-            var c = s.ToCharArray();
-            Array.Sort(c);
-            var d = new Dictionary<char, int>();
-            var sb = new StringBuilder();
-            foreach (var t in c)
-            {
-                if (!d.ContainsKey(t))
-                {
-                    d.Add(t, 1);
-                }
-
-                else
-                {
-                    d[t] += 1;
-                }
-            }
-
-            foreach (var key in d.Keys)
-            {
-                sb.Append($"{key}{d[key]}");
-            }
-
-            return sb.ToString();
+            Array.Sort(s.ToArray());
+            return RepeatStringCompression(s);
         }
 
         public string RepeatStringCompression(string s)
         {
-            var c = s.ToCharArray();
             var sb = new StringBuilder();
 
             int i = 0, j = 0;
-            while (j < c.Length)
+            while (j < s.Length)
             {
-                if (c[i] == c[j])
+                if (s[i] == s[j])
                     j++;
                 else
                 {
-                    sb.Append($"{c[i]}{j - i}");
+                    sb.Append($"{s[i]}{j - i}");
                     i = j;
                 }
             }
 
-            sb.Append($"{c[i]}{j - i}");
+            sb.Append($"{s[i]}{j - i}");
             return sb.ToString();
         }
+
         #endregion
 
         ///////////////////////////////////////////////////////////////////////////////////////// day 6
@@ -349,13 +344,13 @@ namespace DSPractice
         {
             var m = matrix.GetLength(0);
             var n = matrix.GetLength(1);
-            var res = new int[m,n];
+            var res = new int[m, n];
             for (var i = 0; i < m; i++)
             {
                 var cntr = 0;
                 for (var j = 0; j < n; j++)
                 {
-                    res[cntr++, n - i -1] = matrix[i, j];
+                    res[cntr++, n - i - 1] = matrix[i, j];
                 }
             }
 
@@ -419,16 +414,27 @@ namespace DSPractice
 
             return water;
         }
+
         #endregion
 
         ///////////////////////////////////////////////////////////////////////////////////////// day 7
+        /// <summary>
+        /// Linked List
+        /// </summary>
 
-        #region day7-2Pendings
+        #region day7-Completed
 
         public class Node
         {
             public Node next { get; set; }
-            private string value { get; set; }
+            public string value { get; set; }
+            public int intValue { get; set; }
+
+            public Node(int intVal, Node nxt)
+            {
+                next = nxt;
+                intValue = intVal;
+            }
 
             public Node(string val, Node nxt)
             {
@@ -441,7 +447,7 @@ namespace DSPractice
         {
             if (head == null || head.next == null)
                 return null;
-            
+
             var f_pt = head;
             var s_pt = head;
             Node prev = null;
@@ -456,21 +462,379 @@ namespace DSPractice
             prev.next = s_pt.next;
 
             return head;
+        }
+
+        public static Node RemoveDuplicatesFromSortedLinkedListWithoutTempBuffer(Node sortedHead)
+        {
+            var pt = sortedHead;
+            //temporary buffer is not allowed
+            while (pt != null)
+            {
+                if (pt.next != null && pt.intValue == pt.next.intValue)
+                {
+                    pt.next = pt.next.next;
+                }
+
+                else
+                    pt = pt.next;
+            }
+
+            return sortedHead;
+        }
+
+        public Node ReturnKthFromLast(Node head, int k)
+        {
+            var ptr = head;
+            var m = GetNodeLength(head);
+            var i = 0;
+            while (m - i > k)
+            {
+                ptr = ptr.next;
+                i++;
+            }
+            return ptr;
+        }
+
+        #endregion
+
+        ///////////////////////////////////////////////////////////////////////////////////////// day 8
+
+        #region day8-2Pendings
+
+        public Node ReturnPartitionedLlAroundANumberWithSameOrder(Node head, int x)
+        {
+            return head;
+        }
+
+        public Node ReturnSumLl(Node node1, Node node2)
+        {
+            var sumNode = new Node("", null);
+            return sumNode;
+        }
+
+        public bool IsLlPalindrome(Node head)
+        {
+            var slow = head;
+            var s = new Stack<int>();
+            var isPalim = true;
+
+            while (slow != null)
+            {
+                s.Push(slow.intValue);
+                slow = slow.next;
+            }
+
+            while (head != null)
+            {
+                if (s.Pop() == head.intValue)
+                    isPalim = true;
+                else
+                    isPalim = false;
+
+                head = head.next;
+            }
+
+            return isPalim;
+        }
+
+        #endregion
+
+        ///////////////////////////////////////////////////////////////////////////////////////// day 9
+
+        #region Day9-Completed
+
+        public Node IntersectionNode(Node n1, Node n2)
+        {
+            int d, c1, c2;
+            c1 = GetNodeLength(n1);
+            c2 = GetNodeLength(n2);
+
+            if (c1 > c2)
+            {
+                d = c1 - c2;
+                return GetIntersection(n1, n2, d);
+            }
+
+            else
+            {
+                d = c2 - c1;
+                return GetIntersection(n2, n1, d);
+            }
+        }
+
+        private static Node GetIntersection(Node biggerNode, Node smallerNode, int d)
+        {
+            for (var i = 0; i < d; i++)
+            {
+                if (biggerNode == null)
+                    return null;
+                biggerNode = biggerNode.next;
+            }
+
+            while (biggerNode != null && smallerNode != null)
+            {
+                if (biggerNode == smallerNode)
+                    return biggerNode;
+                biggerNode = biggerNode.next;
+                smallerNode = smallerNode.next;
+            }
+
+            return null;
+        }
+
+        private int GetNodeLength(Node n)
+        {
+            var i = 0;
+            while (n != null)
+            {
+                i++;
+                n = n.next;
+            }
+
+            return i;
+        }
+
+        public Node LoopDetectionOptimize(Node header)
+        {
+            var hash = new HashSet<Node>();
+            while (header != null)
+            {
+                if (hash.Contains(header))
+                    return header;
+                hash.Add(header);
+                header = header.next;
+            }
+
+            return null;
+        }
+
+        #endregion
+
+        ///////////////////////////////////////////////////////////////////////////////////////// day 10
+        /// <summary>
+        ///  Stacks
+        /// </summary>
+
+        #region Day10
+
+        public void ThreeInOne(int[] arr)
+        {
             
+        }
+
+        #region StackMin
+
+        readonly Stack<int> _stackExample = new Stack<int>();
+        private int _minEle = 0;
+        
+        public void StackPush(int n)
+        {
+            if (_stackExample.Count == 0)
+            {
+                _minEle = n;
+                _stackExample.Push(n);
+            }
+
+            else if (n < _minEle)
+            {
+                _stackExample.Push(2*n - _minEle);
+                _minEle = n;
+            }
+
+            else
+            {
+                _stackExample.Push(n);
+            }
+        }
+
+        public int StackPop()
+        {
+            var t = _stackExample.Pop();
+
+            if (t >= _minEle)
+            {
+                return t;
+            }
+
+            var retVal = _minEle;
+            _minEle = 2 * _minEle - t;
+            return retVal;
+
+        }
+
+        public int StackPeek()
+        {
+            var t = _stackExample.Peek();
+            return t < _minEle ? _minEle : t;
+        }
+        
+        public int StackMin()
+        {
+            return _minEle;
+        }
+
+        #endregion
+
+        private int _counter = 0;
+        public int Capacity { get; set; }
+        private List<Stack<int>> _sets = new List<Stack<int>>();
+        Stack<int> stack = new Stack<int>();
+       
+        public void StackOfPlatesPush(int ele)
+        {
+            if (_counter == 0 || _counter == Capacity)
+            {
+                _counter = 0;
+                stack = new Stack<int>();
+                _sets.Add(stack);
+            }
+            
+            stack.Push(ele);
+            _counter++;
+        }
+        public int StackOfPlatesPop()
+        {
+            if (_counter == 1)
+                _counter = Capacity;
+            
+            else
+                _counter--;
+            
+            return _sets.GetRange(_sets.Count - 1, 1)[0].Pop();
+        }
+
+        #endregion
+        ///////////////////////////////////////////////////////////////////////////////////////// day 11
+
+        #region QuqueUsing2Stacks-EnQueueCostly
+
+        public Stack<int> st1 = new Stack<int>();
+        public Stack<int> st2 = new Stack<int>();
+        
+        public void enQueueUsingStacks(int ele)
+        {
+            while (st1.Count > 0)
+            {
+                st2.Push(st1.Pop());
+            }
+            
+            st1.Push(ele);
+
+            while (st2.Count > 0)
+            {
+                st1.Push(st2.Pop());
+            }
+        }
+
+        public int deQueueUsingStacks()
+        {
+            return st1.Pop();
+        }
+        
+
+        #endregion
+
+        #region QueueUsing2Stacks-DeQueueCostly-better
+
+        public void enQueueUsingStacks1(int e)
+        {
+            st1.Push(e);
+        }
+
+        public int deQueueUsingStacks1()
+        {
+            while (st1.Count > 0)
+            {
+                st2.Push(st1.Pop());
+            }
+
+            return st2.Pop();
+        }
+
+        #endregion
+
+        public Stack<int> SortStack(Stack<int> st)
+        {
+            var tmp = new Stack<int>();
+            var e = 0;
+            while (st.Count > 0)
+            {
+                e = st.Pop();
+                while (tmp.Count > 0 && tmp.Peek() > e)
+                {
+                    st.Push(tmp.Pop());
+                }
+                
+                tmp.Push(e);
+                
+            }
+            return tmp;
+        }
+        ///////////////////////////////////////////////////////////////////////////////////////// day 12
+
+        #region Day-12
+
+        public 
+
+        #endregion
+        ///////////////////////////////////////////////////////////////////////////////////////// day 13
+        ///////////////////////////////////////////////////////////////////////////////////////// day 14 
+        ///////////////////////////////////////////////////////////////////////////////////////// day 15 
+
+
+        #region Extras
+
+        public static Node RemoveDuplicatesFromUnsortedLinkedListWithoutTempBuffer(Node head)
+        {
+            var pt1 = head;
+            var pt2 = head;
+
+            while (pt1 != null)
+            {
+                pt2 = pt1;
+                while (pt2 != null)
+                {
+                    if (pt2.next != null && pt1.intValue == pt2.next.intValue)
+                    {
+                        pt2.next = pt2.next.next;
+                    }
+
+                    else
+                    {
+                        pt2 = pt2.next;
+                    }
+                }
+
+                pt1 = pt1.next;
+            }
+
             return head;
         }
 
-        public static Node DeleteDups(Node head)
+        public Node SortLinkedListN2(Node head)
         {
-            return head;
-        }
+            var pt1 = head;
+            var pt2 = head;
+            while (pt1 != null)
+            {
+                pt2 = pt1.next;
+                while (pt2 != null)
+                {
+                    if (pt1.intValue > pt2.intValue)
+                    {
+                        pt1.intValue += pt2.intValue;
+                        pt2.intValue = pt1.intValue - pt2.intValue;
+                        pt1.intValue = pt1.intValue - pt2.intValue;
+                    }
 
-        public static Node ReturnKthToLast(Node head)
-        {
+                    pt2 = pt2.next;
+                }
+                pt1 = pt1.next;
+            }
+
             return head;
         }
 
         #endregion
-        ///////////////////////////////////////////////////////////////////////////////////////// day 8
     }
 }

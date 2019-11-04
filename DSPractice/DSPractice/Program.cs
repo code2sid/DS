@@ -1,9 +1,6 @@
 ﻿using System;
 using System.Collections;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace DSPractice
 {
@@ -16,27 +13,31 @@ namespace DSPractice
             //search();
             //sort();
             //GetHastTable();
-            CrackingCode();
+            CrackingTheCode();
         }
 
-        private static void CrackingCode()
+        private static void CrackingTheCode()
         {
             var o = new CrackingTheCode();
 
             const string permutationString = "ABC";
             o.ReturnStringAllPermutations(permutationString, 0, permutationString.Length - 1);
-            var r = CrackingTheCode.ReturnDistinctPairs(new[] {1, 3, 5, 9, 7}, 2);
+            var r = DSPractice.CrackingTheCode.ReturnDistinctPairs(new[] {1, 3, 5, 9, 7}, 2);
             var magazine = new[] {'t','h','i','s',' ','a','r','n','o','m','e'};
-            var resBool = o.IsMagazineRansomNote(magazine, "this is a ransom note");
+            var resBool = o.IsMagazineRansomNote2(magazine, "this is a ransom note");
             var resDic = o.ReturnAllPalindromePermutations("tact coa");
-            resBool = o.IsPermutationOfOtherString("abc", "cbb");
+            resBool = o.IsPermutationOfOtherString("abc", "cba");
             var resStrArray = o.ReturnPossibleSubStrings("abcdbcadcdabdabc", "abcd");
             var resStr = o.NaggaroVariableProblem("thisIsAVariable");
             resStr = o.NaggaroVariableProblem("this_is_a_variable");
             resStr = o.NaggaroStringCompression("bbbaaaeeedddcccaa");
             resStr = o.RepeatStringCompression("bbbaaaeeedddcccaabbbbb");
             var resInt = o.StaircaseProblem(4, 2);
-            resInt = CrackingTheCode.WaterTrap(new[] {3, 0, 0, 2, 0, 4});
+            resInt = DSPractice.CrackingTheCode.WaterTrap(new[] {3, 0, 0, 2, 0, 4});
+            resBool = DSPractice.CrackingTheCode.IsOneEditAway("sidd", "sidh");
+            var resIntArr = o.ReturnElementsInCommon(new[] {11, 23, 25, 55, 66, 77, 990}, new[] {44, 88, 99, 11, 25});
+            resBool = o.HasUniqueElements("sidhart");
+
             var matrix = new[,]
             {
                 {1, 1, 1, 1},
@@ -44,14 +45,83 @@ namespace DSPractice
                 {3, 3, 3, 3},
                 {4, 4, 4, 4}    
             };
-            var resMatrix = CrackingTheCode.ZeroMatrix(matrix);
-            var head = new CrackingTheCode.Node("1",new CrackingTheCode.Node("2",new CrackingTheCode.Node("3",
-                new CrackingTheCode.Node("4", new CrackingTheCode.Node("5", new CrackingTheCode.Node("6", null))))));
-            resMatrix = CrackingTheCode.RotateMatrix(matrix);
-            var n = CrackingTheCode.DeleteMiddleNode(head);
-            resBool = CrackingTheCode.IsOneEditAway("sidd", "sidh");
-            var resIntArr = o.ReturnElementsInCommon(new[] {11, 23, 25, 55, 66, 77, 990}, new[] {44, 88, 99, 11, 25});
-            resBool = o.HasUniqueElements("sidhart");
+            var resMatrix = DSPractice.CrackingTheCode.ZeroMatrix(matrix);
+            resMatrix = DSPractice.CrackingTheCode.RotateMatrix(matrix);
+
+            var nodeInput = new CrackingTheCode.Node(1,new CrackingTheCode.Node(2,new CrackingTheCode.Node(3,
+                new CrackingTheCode.Node(4, new CrackingTheCode.Node(5, new CrackingTheCode.Node(6, null))))));
+            var n = DSPractice.CrackingTheCode.DeleteMiddleNode(nodeInput);
+            
+            nodeInput = new CrackingTheCode.Node(1, new CrackingTheCode.Node(2, new CrackingTheCode.Node(1, null))); 
+            resBool = o.IsLlPalindrome(nodeInput);
+            
+            var nodeInput1 =
+                new CrackingTheCode.Node("e", new CrackingTheCode.Node("f", new CrackingTheCode.Node("g", null)));
+            nodeInput = new CrackingTheCode.Node("a",new CrackingTheCode.Node("b",new CrackingTheCode.Node("c", new CrackingTheCode.Node("d", nodeInput1))));
+            var nodeInput2 = new CrackingTheCode.Node("m", new CrackingTheCode.Node("n", nodeInput1));
+            var resNode = o.IntersectionNode(nodeInput, nodeInput2);
+            
+            nodeInput2 = new CrackingTheCode.Node(9, null);
+            nodeInput1 = new CrackingTheCode.Node(3, new CrackingTheCode.Node(7, new CrackingTheCode.Node(2, nodeInput2)));
+            var nodeInput3 = new CrackingTheCode.Node(2, nodeInput1);
+            nodeInput2.next = nodeInput3;
+            nodeInput = new CrackingTheCode.Node(8, new CrackingTheCode.Node(1, new CrackingTheCode.Node(9, new CrackingTheCode.Node(4, nodeInput3))));
+            resNode = o.LoopDetectionOptimize(nodeInput);
+            
+            nodeInput = new CrackingTheCode.Node(10,new CrackingTheCode.Node(11,new CrackingTheCode.Node(11,new CrackingTheCode.Node(12, new CrackingTheCode.Node(12, new CrackingTheCode.Node(12, null))))));
+            resNode = DSPractice.CrackingTheCode.RemoveDuplicatesFromSortedLinkedListWithoutTempBuffer(nodeInput);
+            resNode = DSPractice.CrackingTheCode.RemoveDuplicatesFromUnsortedLinkedListWithoutTempBuffer(nodeInput);
+            
+            nodeInput = new CrackingTheCode.Node(40,new CrackingTheCode.Node(20,new CrackingTheCode.Node(60,new CrackingTheCode.Node(10, 
+                new CrackingTheCode.Node(50, new CrackingTheCode.Node(30, new CrackingTheCode.Node(5, null)))))));
+            resNode = o.SortLinkedListN2(nodeInput);
+            resNode = o.ReturnKthFromLast(nodeInput, 4);
+            
+            
+            o.StackPush(3);
+            o.StackPush(5);
+            resInt= o.StackMin();
+            resInt = o.StackPeek();
+            resInt = o.StackPop();
+            o.StackPush(2);
+            o.StackPush(1);
+            resInt= o.StackMin();
+            resInt = o.StackPop();
+            resInt= o.StackMin();
+
+            o.Capacity = 3;
+            o.StackOfPlatesPush(1);
+            o.StackOfPlatesPush(1);
+            o.StackOfPlatesPush(1);
+
+            o.StackOfPlatesPush(1);
+            o.StackOfPlatesPush(1);
+            o.StackOfPlatesPush(2);
+
+            resInt = o.StackOfPlatesPop();
+            
+            o.enQueueUsingStacks(1);
+            o.enQueueUsingStacks(2);
+            o.enQueueUsingStacks(3);
+            o.enQueueUsingStacks(4);
+            resInt = o.deQueueUsingStacks();
+            
+            o.st1=new Stack<int>();
+            o.st2=new Stack<int>();
+            o.enQueueUsingStacks1(1);
+            o.enQueueUsingStacks1(2);
+            o.enQueueUsingStacks1(3);
+            o.enQueueUsingStacks1(4);
+            resInt = o.deQueueUsingStacks1();
+
+            var stackInput = new Stack<int>();
+            stackInput.Push(34);
+            stackInput.Push(3);
+            stackInput.Push(31);
+            stackInput.Push(98);
+            stackInput.Push(92);
+            stackInput.Push(23);
+            var resStack = o.SortStack(stackInput);
             Console.ReadLine();
         }
 
