@@ -1,0 +1,26 @@
+private List<List<int>> ReturnResult(List<List<int>> a, List<List<int>> b, int tgt) {
+        var res = new List<List<int>>();
+        var aCnt = 0, bCnt = 0;
+        while(res.Count == 0) {
+            while(aCnt < a.Count) {
+                bCnt = 0;
+                var l = new List<int>();
+                while(bCnt < b.Count) {
+                    var sum = a.ElementAt(aCnt).ElementAt(1) + b.ElementAt(bCnt).ElementAt(1);
+
+                    if(sum == tgt) {
+                        l.Add(a.ElementAt(aCnt).ElementAt(0)); 
+                        l.Add(b.ElementAt(bCnt).ElementAt(0));
+                    }
+                }
+                if(l.Count > 0)
+                    res.Add(l);
+            }
+            if(res.Count > 0)
+                return res;
+            
+            tgt--;
+        }
+        
+        return res;
+    }
