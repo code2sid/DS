@@ -774,7 +774,7 @@ namespace DSPractice
 
         #region Day-12
 
-        public 
+        
 
         #endregion
         ///////////////////////////////////////////////////////////////////////////////////////// day 13
@@ -834,6 +834,164 @@ namespace DSPractice
 
             return head;
         }
+
+        #endregion
+
+        #region AMZ
+
+        #region TreasureIsland
+
+        private readonly int[,] DIRS =  
+        {
+            {1,0},
+            {0,1},
+            {-1,0},
+            {0,-1}
+        };
+        private class Point
+        {
+            public readonly int r;
+            public readonly int c;
+            public Point(int r, int c) {
+                this.r = r;
+                this.c = c;
+            }
+        
+        }
+        
+        public int minSteps(char[,] grid) {
+            var q = new Queue<Point>();
+            q.Enqueue(new Point(0,0));
+            grid[0,0] = 'D';
+            var steps = 1;
+            while(q.Count > 0) {
+                for(var sz = q.Count;sz > 0; sz--)
+                {
+                    var p = q.Dequeue();
+                    for (var i = 0; i < DIRS.GetLength(0); i++)
+                    {
+                        var r = p.r + DIRS[i,0];
+                        var c = p.c + DIRS[i,1];
+                        if (!isSafe(grid, r, c))
+                            continue;
+                        if(grid[r,c] == 'X')
+                            return steps;
+                        
+                        grid[r,c] = 'D';
+                        q.Enqueue(new Point(r,c));
+                        
+                    }
+                }
+
+                steps++;
+            }
+            return -1;
+        }
+    
+        private static bool isSafe(char[,] g, int r, int c)
+        {
+            return r >= 0 && r < g.GetLength(0) && 
+                   c >= 0 && c < g.GetLength(1) &&
+                   g[r,c] != 'D';
+        }
+
+        #endregion
+
+        #region CountIslands - DONE
+
+        public int CountIslands(char[,] g)
+        {
+            var cnt=0;
+            var R = g.GetLength(0);
+            var C = g.GetLength(1);
+            for (var r = 0; r < R; r++)
+            {
+                for (var c = 0; c < C; c++)
+                {
+                    if (g[r, c] == '1')
+                    {
+                        cnt++;
+                        markLands(g, r, c);
+
+                    }
+                }
+            }
+            return cnt;
+        }
+
+        private void markLands(char[,] g, int r, int c)
+        {
+            if (r < 0 || c < 0)
+                return;
+            if(r>=g.GetLength(0) || c>=g.GetLength(1))
+                return;
+            if(g[r,c] == '0')
+                return;
+            if(g[r,c] == 'x')
+                return;
+            if (g[r, c] == '1')
+                g[r, c] = 'x';
+            
+            markLands(g,r++,c);
+            markLands(g,r,c++);
+            markLands(g,r--,c);
+            markLands(g,r,c--);
+
+        }
+
+        #endregion
+
+        #region RottonOranges
+
+        public int CountHoursForRottonOranges(int[][] g)
+        {
+            var hrs = 1;
+            var R = g.Length;
+            var C = g[0].Length;
+            for (int r = 0; r < R; r++)
+            {
+                for (int c = 0; c < C; c++)
+                {
+                    if (g[r][c] == 2)
+                    {
+                        hrs++;
+                        orangeRot(g, r, c);
+                        
+                    }
+                }
+            }
+
+            return hrs;
+        }
+
+        private void orangeRot(int[][] g, int r, int c)
+        {
+            if(r<0 || c<0)
+                return;
+            if(r>=g.Length || c>=g[0].Length)
+                return;
+            if(g[r][c] == 2)
+                g[r][c] = -1;
+            if (g[r][c] == 1)
+                g[r][c] = 2;
+            if(g[r][c] == 0)
+                return;
+            orangeRot(g, ++r, c);
+            orangeRot(g, r, ++c);
+            //orangeChange(g, --r, c);
+            //orangeChange(g, r, --c);
+
+
+        }
+
+        #endregion
+
+        #region FavoriteGenres
+
+        public void 
+        
+
+        #endregion
 
         #endregion
     }

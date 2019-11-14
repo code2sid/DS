@@ -122,6 +122,39 @@ namespace DSPractice
             stackInput.Push(92);
             stackInput.Push(23);
             var resStack = o.SortStack(stackInput);
+            char[,] matrixStr = 
+               {{'O', 'O', 'O', 'O'},
+                {'D', 'O', 'D', 'O'},
+                {'O', 'O', 'O', 'O'},
+                {'X', 'D', 'D', 'O'}};
+            resInt = o.minSteps(matrixStr);
+            
+            
+            matrixStr = new[,]
+            {
+                {
+                    '1', '1', '1', '0'
+                },
+                {
+                    '0', '1', '1', '0'
+                },
+                {
+                    '0', '0', '0', '1'
+                },
+                {
+                    '0', '1', '1', '1'
+                }
+            }
+            ;
+            resInt = o.CountIslands(matrixStr);
+            var matrixInt = new[]
+            {
+                new[] {2,1,1},
+                new[] {1,1,0},
+                new[] {0,1,1}
+            };
+            resInt = o.CountHoursForRottonOranges(matrixInt);
+            
             Console.ReadLine();
         }
 
