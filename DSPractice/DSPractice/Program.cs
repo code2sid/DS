@@ -154,6 +154,19 @@ namespace DSPractice
                 new[] {0,1,1}
             };
             resInt = o.CountHoursForRottonOranges(matrixInt);
+            var dicStringListStringInput1 = new Dictionary<string, List<string>>();
+            var dicStringListStringInput2 = new Dictionary<string, List<string>>();
+            
+            dicStringListStringInput1.Add("David", new List<string> {"song1","song2","song3","song4","song8"});
+            dicStringListStringInput1.Add("Emma", new List<string> {"song5","song6","song7"});
+            
+            dicStringListStringInput2.Add("Rock", new List<string>{"song1","song3"});
+            dicStringListStringInput2.Add("Dubstep", new List<string>{"song7"});
+            dicStringListStringInput2.Add("Techno", new List<string>{"song2","song4"});
+            dicStringListStringInput2.Add("Pop", new List<string>{"song5","song6"});
+            dicStringListStringInput2.Add("Jazz", new List<string>{"song8","song9"});
+            
+            var resDicStringInt = o.FavoriteGenes(dicStringListStringInput1, dicStringListStringInput2);
             
             Console.ReadLine();
         }

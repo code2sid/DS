@@ -983,12 +983,70 @@ namespace DSPractice
 
 
         }
+        
+        public int FirstUniqChar(string s) {
+            var d = new Dictionary<char,int>();
+            foreach(char c in s)
+            {
+                if(!d.ContainsKey(c))
+                    d.Add(c,1);
+                else 
+                    d[c] += 1;
+            }
+        
+            var k = d.Single(f=>f.Value == 1);
+        
+            for(var i=0;i<s.Length;i++)
+                if(s[i] == k.Value)
+                    return i;
+            return -1;
+        
+        }
 
         #endregion
 
         #region FavoriteGenres
 
-        public void 
+        public Dictionary<string,List<string>> FavoriteGenes(Dictionary<string,List<string>> userSongsDic, Dictionary<string,List<string>> songGenresDic)
+        {
+            var res = new Dictionary<string,List<string>>();
+            var userGenreSongsCntDic = new Dictionary<string,Dictionary<string,int>>();
+            int userCommonSongsCnt = 0, maxCnt = 0;
+            var genreSngCntDic = new Dictionary<string, int>();
+            foreach(var u in userSongsDic)
+            {
+                var user = u.Key;
+                var userSongs = u.Value;
+                genreSngCntDic = new Dictionary<string, int>();
+                foreach (var genre in songGenresDic)
+                {
+                    userCommonSongsCnt = userSongs.Join(genre.Value, us => us, gs => gs, (us, gs) => gs).Count();
+                    if (userCommonSongsCnt > maxCnt)
+                        maxCnt = userCommonSongsCnt;
+                    if (userCommonSongsCnt > 0)
+                        genreSngCntDic.Add(genre.Key, userCommonSongsCnt);
+                }
+                
+                if (!userGenreSongsCntDic.ContainsKey(u.Key))
+                    userGenreSongsCntDic.Add(u.Key, genreSngCntDic);
+            }
+
+            foreach (var userGenreSongsCntItem in userGenreSongsCntDic)
+            {
+                foreach (var genreItem in userGenreSongsCntItem.Value)
+                {
+                    if(genreItem.Value == maxCnt)
+                    {
+                        if(!res.ContainsKey(userGenreSongsCntItem.Key))
+                            res.Add(userGenreSongsCntItem.Key, new List<string> {genreItem.Key});
+                        else
+                            res[userGenreSongsCntItem.Key].Add(genreItem.Key);
+                    }
+                }
+            }
+
+            return res;
+        } 
         
 
         #endregion
