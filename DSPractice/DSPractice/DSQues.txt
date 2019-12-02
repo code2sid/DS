@@ -8,11 +8,15 @@ Search a 2d Matrix II
 Intersection of 2 Linked List
 In-order/Pre-order built a tree
 Lowest Common ancestor of binary tree
+Reverse Linked List in place
+Validate Binary Search tree - trick
+Binary srch iterator
 
 left
 Best time to buy and sell stock
 Longest Palindromic substring
 Word Ladder
-Reverse Linked List in place
-Validate Binary Search tree - trick
-Binary srch iterator
+
+Animal Shelter
+Rat in Maze - AMZ
+
