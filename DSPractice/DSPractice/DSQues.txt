@@ -18,6 +18,10 @@ Longest Palindromic substring
 Word Ladder
 
 Animal Shelter
+BST Sequences
+Random Node
+paths with Sum - optimize
+
 Rat in Maze - AMZ
 
 Bit Manipulation
