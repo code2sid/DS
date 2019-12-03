@@ -20,3 +20,5 @@ Word Ladder
 Animal Shelter
 Rat in Maze - AMZ
 
+Bit Manipulation
+Math n Logical puzzles
