@@ -774,13 +774,87 @@ namespace DSPractice
 
         #region Day-12
 
-        
+
 
         #endregion
         ///////////////////////////////////////////////////////////////////////////////////////// day 13
         ///////////////////////////////////////////////////////////////////////////////////////// day 14 
         ///////////////////////////////////////////////////////////////////////////////////////// day 15 
 
+
+        #region PeeksAndValley
+        public int[] sortvalleyPeak(int[] arr)
+        {
+            var bigIndex = 0;
+            for (int i = 1; i < arr.Length; i += 2)
+            {
+                bigIndex = maxIndex(arr, i - 1, i, i + 1);
+                swap.fnSwap(ref arr[bigIndex], ref arr[i]);
+            }
+
+            return arr;
+
+        }
+
+
+        private int maxIndex(int[] arr, int a, int b, int c)
+        {
+            var aVal = a > -1 && a < arr.Length ? arr[a] : int.MinValue;
+            var bVal = b > -1 && b < arr.Length ? arr[b] : int.MinValue;
+            var cVal = c > -1 && c < arr.Length ? arr[c] : int.MinValue;
+
+            var max = Math.Max(aVal, Math.Max(bVal, cVal));
+
+            if (max == aVal)
+                return a;
+            else if (max == bVal)
+                return b;
+
+            return c;
+
+        }
+
+        //private void swap(ref int a, ref int b)
+        //{
+        //    a = a + b;
+        //    b = a - b;
+        //    a = a - b;
+        //}
+        #endregion
+
+        #region SortedArraySrch
+        public int Search(int[] n, int x)
+        {
+            return srch(n, x, 0, n.Length - 1);
+        }
+
+        private int srch(int[] n, int x, int left, int right)
+        {
+            var mid = (left + right) / 2;
+            if (n[mid] == x)
+                return mid;
+
+            if (left > right)
+                return -1;
+
+            if (n[mid] > n[left])
+            {
+                if (x >= n[left] && x < n[mid])
+                    return srch(n, x, left, mid - 1);
+                else
+                    return srch(n, x, mid + 1, right);
+            }
+            else if (n[mid] < n[left])
+            {
+                if (x > n[mid] && x <= n[right])
+                    return srch(n, x, mid + 1, left);
+                else
+                    return srch(n, x, left, mid - 1);
+            }
+
+            return -1;
+        }
+        #endregion
 
         #region Extras
 

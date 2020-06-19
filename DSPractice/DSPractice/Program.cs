@@ -13,7 +13,10 @@ namespace DSPractice
             //search();
             //sort();
             //GetHastTable();
-            CrackingTheCode();
+            //CrackingTheCode();
+
+            var h = new handleClass();
+            h.main();
         }
 
         private static void CrackingTheCode()
@@ -167,7 +170,9 @@ namespace DSPractice
             dicStringListStringInput2.Add("Jazz", new List<string>{"song8","song9"});
             
             var resDicStringInt = o.FavoriteGenes(dicStringListStringInput1, dicStringListStringInput2);
-            
+
+            o.sortvalleyPeak(new[] { 9, 1, 0, 4, 8, 7 });
+            o.Search(new[] { 1,3 },3);
             Console.ReadLine();
         }
 

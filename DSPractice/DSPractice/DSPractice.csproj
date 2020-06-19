@@ -44,6 +44,7 @@
     <Compile Include="CrackingTheCode.cs" />
     <Compile Include="Designs.cs" />
     <Compile Include="Graph.cs" />
+    <Compile Include="parentClass.cs" />
     <Compile Include="Practice.cs" />
     <Compile Include="Search.cs" />
     <Compile Include="Program.cs" />
