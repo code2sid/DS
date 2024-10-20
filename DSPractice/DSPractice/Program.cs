@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 
 namespace DSPractice
 {
@@ -14,9 +15,25 @@ namespace DSPractice
             //sort();
             //GetHastTable();
             //CrackingTheCode();
+            new2024Ques();
 
-            var h = new handleClass();
-            h.main();
+
+            //var h = new handleClass();
+            //h.main();
+        }
+
+        private static void new2024Ques()
+        {
+            var m = new new2024Ques();
+            var intA = new[] { 1, 1, 1, 2, 2, 3, 3, 3, 4, 4, 5, 5, 5 };
+            var res = m.RemoveDuplicates1(intA);
+            Console.WriteLine("the output is: {0}---->{1}" , 
+                string.Join(",",res.Item1.Select(i=>i.ToString()).ToArray()).Substring(0,res.Item2*2-1),res.Item2);
+            res = m.RemoveDuplicates2(intA);
+
+            Console.WriteLine("the output is: {0}---->{1}",
+                string.Join(",", res.Item1.Select(i => i.ToString()).ToArray()).Substring(0, res.Item2 * 2 - 1), res.Item2);
+            Console.ReadLine();
         }
 
         private static void CrackingTheCode()
